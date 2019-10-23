@@ -1,6 +1,3 @@
-// 执行用时 : 4 ms , 在所有 golang 提交中击败了 94.78% 的用户
-// 内存消耗 : 2.2 MB , 在所有 golang 提交中击败了 80.85% 的用户
-
 func longestPalindrome(s string) string {
 	if len(s) == 0 {
 		return ""

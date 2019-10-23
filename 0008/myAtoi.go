@@ -3,9 +3,6 @@ import (
 	"strings"
 )
 
-// 执行用时 : 4 ms , 在所有 golang 提交中击败了 61.40% 的用户
-// 内存消耗 : 2.3 MB , 在所有 golang 提交中击败了 59.89% 的用户
-
 func myAtoi(s string) int {
 	return convert(clean(s))
 }

@@ -1,6 +1,3 @@
-// 执行用时 : 16 ms , 在所有 golang 提交中击败了 88.44% 的用户
-// 内存消耗 : 5.5 MB , 在所有 golang 提交中击败了 79.21% 的用户
-
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	m, n := len(nums1), len(nums2)
 	if (m+n)&1 != 0 {

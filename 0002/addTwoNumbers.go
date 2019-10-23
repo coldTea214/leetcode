@@ -1,6 +1,3 @@
-// 执行用时 : 16 ms , 在所有 golang 提交中击败了 62.61% 的用户
-// 内存消耗 : 4.9 MB , 在所有 golang 提交中击败了 94.01% 的用户
-
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	fakeHead := &ListNode{}
 	curPtr := fakeHead

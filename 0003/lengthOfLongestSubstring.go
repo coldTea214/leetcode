@@ -1,6 +1,3 @@
-// 执行用时 : 12 ms , 在所有 golang 提交中击败了 55.10% 的用户
-// 内存消耗 : 2.8 MB , 在所有 golang 提交中击败了 71.26%
-
 func lengthOfLongestSubstring(s string) int {
 	letterIdx := make(map[byte]int)
 	strBeg, maxLen, curLen := 0, 0, 0

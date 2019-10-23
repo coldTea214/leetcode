@@ -1,6 +1,3 @@
-// 执行用时 : 0 ms , 在所有 golang 提交中击败了 100.00% 的用户
-// 内存消耗 : 2.4 MB , 在所有 golang 提交中击败了 25.93% 的用户
-
 func isMatch(s, p string) bool {
 	sLen := len(s)
 	pLen := len(p)
