@@ -3,3 +3,4 @@
 * [0003. 无重复字符的最长子串](./0003/lengthOfLongestSubstring.go)
 * [0004. 寻找两个有序数组的中位数](./0004/findMedianSortedArrays.go)
 * [0005. 最长回文子串](./0005/longestPalindrome.go)
+* [0006. Z字形变换](./0006/convert.go)
