@@ -4,3 +4,6 @@
 * [0004. 寻找两个有序数组的中位数](./0004/findMedianSortedArrays.go)
 * [0005. 最长回文子串](./0005/longestPalindrome.go)
 * [0006. Z字形变换](./0006/convert.go)
+* [0007. 整数反转](./0007/reverse.go)
+* [0008. 字符串转换整数 (atoi)](./0008/myAtoi.go)
+* [0009. 回文数](./0009/isPalindrome.go)
