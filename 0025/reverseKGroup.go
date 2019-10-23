@@ -12,9 +12,6 @@ func doReverse(head *ListNode, k int) *ListNode {
 		// k = 3
 		// 3 -> 2 -> 1 -> 4 -> 5 -> 6 -> 7
 		//                h         t    tn
-		tail.Next = nil
-		// 3 -> 2 -> 1 -> 4 -> 5 -> 6    7
-		//                h         t    tn
 		head, tail = reverseList(head, tail)
 		// 3 -> 2 -> 1 -> 6 -> 5 -> 4    7
 		//                h         t    tn
@@ -35,11 +32,12 @@ func getTail(head *ListNode, k int) (*ListNode, bool) {
 	return head, head != nil
 }
 
-// input:  1 -> 2 -> 3
+// input:  1 -> 2 -> 3 ->
 // output: 3 -> 2 -> 1
 func reverseList(head, tail *ListNode) (*ListNode, *ListNode) {
 	slowPtr, quickPtr := head, head.Next
-	for quickPtr != nil {
+	endPtr := tail.Next
+	for quickPtr != endPtr {
 		tmpPtr := quickPtr.Next
 		quickPtr.Next = slowPtr
 		slowPtr = quickPtr
