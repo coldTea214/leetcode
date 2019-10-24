@@ -33,3 +33,4 @@
 [0029. 两数相除](0029/divide.go) | 79.79 | 44.00
 [0030. 串联所有单词的子串](0030/findSubstring.go) | 99.42 | 86.49
 [0031. 下一个排列](0031/nextPermutation.go) | 100.00 | 68.00
+[0032. 最长有效括号](0032/longestValidParentheses.go) | 100.00 | 91.49
