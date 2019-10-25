@@ -1,7 +1,7 @@
 func isValidSudoku(board [][]byte) bool {
-	appearInRow := [10][10]bool{}
-	appearInCol := [10][10]bool{}
-	appearInBlock := [10][10]bool{}
+	appearInRow := [9][10]bool{}
+	appearInCol := [9][10]bool{}
+	appearInBlock := [9][10]bool{}
 
 	for i := range board {
 		for j := range board[i] {
