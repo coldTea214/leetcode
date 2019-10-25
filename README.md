@@ -42,3 +42,4 @@
 [0038. 报数](0038/countAndSay.go) | 100.00 | 59.77
 [0039. 组合总和](0039/combinationSum.go) | 57.45 | 36.36
 [0040. 组合总和 II](0040/combinationSum2.go) | 100.00 | 58.33
+[0041. 缺失的第一个正数](0041/firstMissingPositive.go) | 100.00 | 73.02
