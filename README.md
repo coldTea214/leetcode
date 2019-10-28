@@ -62,3 +62,7 @@
 [0058. 最后一个单词的长度](0058/lengthOfLastWord.go) | 100.00 | 92.39
 [0059. 螺旋矩阵 II](0059/generateMatrix.go) | 100.00 | 47.50
 [0060. 第k个排列](0060/getPermutation.go) | 100.00 | 75.68
+[0061. 旋转链表](0061/rotateRight.go) | 100.00 | 100.00
+[0062. 不同路径](0062/uniquePaths.go) | 100.00 | 35.82
+[0063. 不同路径 II](0063/uniquePathsWithObstacles.go) | 100.00 | 74.07
+[0064. 最小路径和](0064/minPathSum.go) | 94.77 | 43.94
