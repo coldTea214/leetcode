@@ -66,3 +66,4 @@
 [0062. 不同路径](0062/uniquePaths.go) | 100.00 | 35.82
 [0063. 不同路径 II](0063/uniquePathsWithObstacles.go) | 100.00 | 74.07
 [0064. 最小路径和](0064/minPathSum.go) | 94.77 | 43.94
+[0065. 有效数字](0065/isNumber.go) | 100.00 | 50.00
