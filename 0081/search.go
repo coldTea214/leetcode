@@ -1,9 +1,9 @@
-func search(nums []int, target int) int {
+func search(nums []int, target int) bool {
 	low, high := 0, len(nums)-1
 	for low <= high {
 		mid := (low + high) >> 1
 		if target == nums[mid] {
-			return mid
+			return true
 		} else if nums[mid] < nums[high] {
 			// 4 5 1 2 3
 			//     m
@@ -12,7 +12,7 @@ func search(nums []int, target int) int {
 			} else {
 				high = mid - 1
 			}
-		} else {
+		} else if nums[mid] > nums[high] {
 			// 3 4 5 1 2
 			//     m
 			if nums[low] <= target && target < nums[mid] {
@@ -20,7 +20,9 @@ func search(nums []int, target int) int {
 			} else {
 				low = mid + 1
 			}
+		} else {
+			high--
 		}
 	}
-	return -1
+	return false
 }
