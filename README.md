@@ -86,3 +86,4 @@
 [0082. 删除排序链表中的重复元素 II](0082/deleteDuplicates.go) | 92.78 | 45.61
 [0083. 删除排序链表中的重复元素](0083/deleteDuplicates.go) | 93.04 | 69.34
 [0084. 柱状图中最大的矩形](0084/largestRectangleArea.go) | 98.65 | 53.57
+[0085. 最大矩形](0085/maximalRectangle.go) | 100.00 | 60.00
