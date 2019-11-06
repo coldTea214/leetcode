@@ -95,3 +95,6 @@
 [0091. 解码方法](0091/numDecodings.go) | 100.00 | 75.00
 [0092. 反转链表 II](0092/reverseBetween.go) | 100.00 | 26.41
 [0093. 复原IP地址](0093/restoreIpAddresses.go) | 100.00 | 100.00
+[0094. 二叉树的中序遍历](0094/inorderTraversal.go) | 非递归/100.00 | 93.71
+[0095. 不同的二叉搜索树 II](0095/generateTrees.go) | 81.40 | 7.69
+[0096. 不同的二叉搜索树](0096/numTrees.go) | 100.00 | 80.56
