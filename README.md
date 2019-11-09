@@ -129,3 +129,4 @@
 [0125. 验证回文串](0125/isPalindrome.go) | 78.52 | 69.19
 [0126. 单词接龙 II](0126/findLadders.go) | 86.67 | 25.00
 [0127. 单词接龙](0127/ladderLength.go) | 62.39 | 26.09
+[0128. 最长连续序列](0128/longestConsecutive.go) | 88.34 | 32.26
