@@ -146,3 +146,4 @@
 [0142. 环形链表 II](0142/detectCycle.go) | 90.96 | 99.16
 [0143. 重排链表](0143/reorderList.go) | 82.02 | 100.00
 [0144. 二叉树的前序遍历](0144/preorderTraversal.go) | 100.00 | 95.45
+[0145. 二叉树的后序遍历](0145/postorderTraversal.go) | 100.00 | 98.67
