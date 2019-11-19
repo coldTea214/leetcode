@@ -160,3 +160,8 @@
 [0160. 相交链表](0160/getIntersectionNode.go) | 91.82 | 41.71
 [0162. 寻找峰值](0162/findPeakElement.go) | 89.36 | 34.38
 [0164. 最大间距](0164/maximumGap) | 70.97 | 45.45
+[0165. 比较版本号](0165/compareVersion.go) | 100.00 | 78.57
+[0166. 分数到小数](0166/fractionToDecimal.go) | 100.00 | 100.00
+[0167. 两数之和 II - 输入有序数组](0167/twoSum.go) | 97.00 | 68.38
+[0168. Excel表列名称](0168/convertToTitle.go) | 100.00 | 81.25
+[0169. 求众数](0169/majorityElement.go) | 96.16 | 88.74
