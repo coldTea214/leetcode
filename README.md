@@ -168,3 +168,4 @@
 [0171. Excel表列序号](0171/titleToNumber.go) | 54.86 | 87.69
 [0172. 阶乘后的零](0172/trailingZeroes.go) | 100.00 | 94.12
 [0173. 二叉搜索树迭代器](0173/BSTIterator.go) | 100.00 | 44.44
+[0174. 地下城游戏](0174/calculateMinimumHP.go) | 96.61 | 50.00
