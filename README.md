@@ -165,3 +165,6 @@
 [0167. 两数之和 II - 输入有序数组](0167/twoSum.go) | 97.00 | 68.38
 [0168. Excel表列名称](0168/convertToTitle.go) | 100.00 | 81.25
 [0169. 求众数](0169/majorityElement.go) | 96.16 | 88.74
+[0171. Excel表列序号](0171/titleToNumber.go) | 54.86 | 87.69
+[0172. 阶乘后的零](0172/trailingZeroes.go) | 100.00 | 94.12
+[0173. 二叉搜索树迭代器](0173/BSTIterator.go) | 100.00 | 44.44
