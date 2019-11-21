@@ -166,3 +166,5 @@
 [0173. 二叉搜索树迭代器](0173/BSTIterator.go) | 100.00 | 44.44
 [0174. 地下城游戏](0174/calculateMinimumHP.go) | 96.61 | 50.00
 [0179. 最大数](0179/largestNumber.go) | 76.67 | 57.78
+[0187. 重复的DNA序列](0187/findRepeatedDnaSequences.go) | 63.51 | 20.00
+[0188. 买卖股票的最佳时机 IV](0188/maxProfit.go) | 91.25 | 75.00
