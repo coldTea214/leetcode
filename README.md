@@ -189,3 +189,5 @@
 [0213. 打家劫舍 II](0213/rob.go) | 100.00 | 45.45
 [0214. 最短回文串](0214/shortestPalindrome.go) | 100.00 | 36.36
 [0215. 数组中的第K个最大元素](0215/findKthLargest.go) | 36.70 | 29.45
+[0216. 组合总和 III](0216/combinationSum3.go) | 100.00 | 22.22
+[0217. 存在重复元素](0217/containsDuplicate.go) | 90.00 | 99.59
