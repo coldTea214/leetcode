@@ -3,7 +3,8 @@ func shortestPalindrome(s string) string {
 		return s
 	}
 
-	i := getIndex(s + "#" + reverse(s))
+	// 不用 # 分隔，i 会超过原本字符串长度
+	i := kmp(s + "#" + reverse(s))
 	return reverse(s[i:]) + s
 }
 
@@ -15,28 +16,29 @@ func reverse(s string) string {
 	return string(bytes)
 }
 
-func getIndex(s string) int {
-	// table[i] 是 s[:i+1] 的前缀集与后缀集中，最长公共元素的长度
-	// "abcd" 的前缀集是 ["", "a", "ab", "abc"]
-	// "abcd" 的后缀集是 ["", "d", "cd", "bcd"]
-	// "abcd" 的前缀集与后缀集的最长公共元素是"", 它的长度是 0
-	table := make([]int, len(s))
+// kmp 算法，介绍可参考：http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html
+// 输入: acecaaa
+// 构造: acecaaa#aaaceca
+// 跳表: 000011101112345
+// 最后一个值为 5 含义是：后缀 aceca 跟前缀一致
+func kmp(s string) int {
+	next := make([]int, len(s))
 	klen, i := 0, 1
 
 	for i < len(s) {
 		if s[i] == s[klen] {
 			klen++
-			table[i] = klen
+			next[i] = klen
 			i++
 		} else {
 			if klen == 0 {
-				table[i] = 0
+				next[i] = 0
 				i++
 			} else {
-				klen = table[klen-1]
+				klen = next[klen-1]
 			}
 		}
 	}
 
-	return table[len(s)-1]
+	return next[len(s)-1]
 }
