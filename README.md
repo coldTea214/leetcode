@@ -212,3 +212,7 @@ Todo-0218. 天际线问题||
 [0236. 二叉树的最近公共祖先](0236/lowestCommonAncestor.go) | 95.47 | 98.17
 [0237. 删除链表中的节点](0237/deleteNode.go) | 81.78 | 87.44
 [0238. 除自身以外数组的乘积](0238/productExceptSelf.go) | 98.26 | 100.00
+[0239. 滑动窗口最大值](0239/maxSlidingWindow.go) | 97.68 | 100.00
+[0240. 搜索二维矩阵 II](0240/searchMatrix.go) | 72.18 | 73.41
+[0241. 为运算表达式设计优先级](0241/diffWaysToCompute.go) | 100.00 | 100.00
+[0242. 有效的字母异位词](0242/isAnagram.go)
