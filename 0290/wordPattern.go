@@ -6,6 +6,7 @@ func wordPattern(pattern string, str string) bool {
 	if len(ps) != len(ss) {
 		return false
 	}
+	// 如果只调 isMatch 一次，"a b" 和 "aaa aaa" 也能匹配
 	return isMatch(ps, ss) && isMatch(ss, ps)
 }
 
