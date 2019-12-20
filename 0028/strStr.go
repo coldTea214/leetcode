@@ -1,5 +1,11 @@
-// 从题目定义为‘简单’，估摸着也不是想让实现kmp了
+import "strings"
 
+// 解法1
+func strStr(haystack string, needle string) int {
+	return strings.Index(haystack, needle)
+}
+
+// 解法2
 func strStr(haystack string, needle string) int {
 	hlen, nlen := len(haystack), len(needle)
 	for i := 0; i <= hlen-nlen; i++ {
@@ -7,6 +13,10 @@ func strStr(haystack string, needle string) int {
 			return i
 		}
 	}
-
 	return -1
+}
+
+// 解法3
+func strStr(haystack string, needle string) int {
+	// kmp
 }

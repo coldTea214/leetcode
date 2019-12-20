@@ -11,6 +11,5 @@ func jump(nums []int) int {
 			}
 		}
 	}
-
 	return minStep[len(nums)-1]
 }

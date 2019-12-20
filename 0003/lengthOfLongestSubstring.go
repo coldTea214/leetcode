@@ -1,14 +1,13 @@
 func lengthOfLongestSubstring(s string) int {
 	letterIdx := make(map[byte]int)
-	strBeg, maxLen, curLen := 0, 0, 0
+	strBeg, maxLen := 0, 0
 	for idx1 := 0; idx1 < len(s); idx1++ {
 		letter := s[idx1]
 
 		idx2, ok := letterIdx[letter]
 		if ok {
-			curLen = idx1 - strBeg
-			if curLen > maxLen {
-				maxLen = curLen
+			if idx1-strBeg > maxLen {
+				maxLen = idx1 - strBeg
 			}
 
 			for i := strBeg; i <= idx2; i++ {
@@ -19,9 +18,8 @@ func lengthOfLongestSubstring(s string) int {
 
 		letterIdx[letter] = idx1
 	}
-	curLen = len(s) - strBeg
-	if curLen > maxLen {
-		maxLen = curLen
+	if len(s)-strBeg > maxLen {
+		maxLen = len(s) - strBeg
 	}
 	return maxLen
 }

@@ -26,7 +26,6 @@ func multiply(num1 string, num2 string) string {
 	for i := 0; i < len(resInt); i++ {
 		resByte[i] = '0' + byte(resInt[i])
 	}
-
 	return string(resByte)
 }
 

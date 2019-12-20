@@ -11,19 +11,19 @@ var numberToLetter = map[byte][]string{
 
 func letterCombinations(digits string) []string {
 	var words []string
-	generateWords(digits, "", &words)
-	return words
-}
-
-func generateWords(digits string, word string, words *[]string) {
-	if digits == "" {
-		if word != "" {
-			*words = append(*words, word)
+	var generateWords func(string, string)
+	generateWords = func(digits, word string) {
+		if digits == "" {
+			if word != "" {
+				words = append(words, word)
+			}
+			return
 		}
-		return
-	}
 
-	for _, letter := range numberToLetter[digits[0]] {
-		generateWords(digits[1:], word+letter, words)
+		for _, letter := range numberToLetter[digits[0]] {
+			generateWords(digits[1:], word+letter)
+		}
 	}
+	generateWords(digits, "")
+	return words
 }

@@ -1,9 +1,9 @@
 import "math"
 
 func divide(dividend int, divisor int) int {
-	var resNegtive bool
+	var isNegtive bool
 	if (dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0) {
-		resNegtive = true
+		isNegtive = true
 	}
 	if dividend < 0 {
 		dividend = -dividend
@@ -27,7 +27,7 @@ func divide(dividend int, divisor int) int {
 		}
 	}
 
-	if resNegtive {
+	if isNegtive {
 		res = -res
 	}
 	if res > math.MaxInt32 {

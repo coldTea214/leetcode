@@ -1,6 +1,6 @@
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	fakeHead := &ListNode{}
-	curPtr := fakeHead
+	preHead := &ListNode{}
+	curPtr := preHead
 	for l1 != nil && l2 != nil {
 		if l1.Val < l2.Val {
 			curPtr.Next = l1
@@ -18,5 +18,5 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	if l2 != nil {
 		curPtr.Next = l2
 	}
-	return fakeHead.Next
+	return preHead.Next
 }

@@ -15,11 +15,11 @@ func minSubArrayLen(s int, nums []int) int {
 			sum += nums[r]
 			r++
 		} else {
+			if r-l < minLen {
+				minLen = r - l
+			}
 			sum -= nums[l]
 			l++
-			if r-l+1 < minLen {
-				minLen = r - l + 1
-			}
 		}
 	}
 

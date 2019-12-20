@@ -1,10 +1,8 @@
 func isValid(s string) bool {
-	sLen := len(s)
-
-	stack := make([]byte, sLen)
+	stack := make([]byte, len(s))
 	top := 0
 
-	for i := 0; i < sLen; i++ {
+	for i := 0; i < len(s); i++ {
 		c := s[i]
 		switch c {
 		case '(':

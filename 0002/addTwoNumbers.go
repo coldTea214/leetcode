@@ -1,6 +1,6 @@
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	fakeHead := &ListNode{}
-	curPtr := fakeHead
+	preHead := &ListNode{}
+	curPtr := preHead
 
 	var carry int
 	for l1 != nil || l2 != nil {
@@ -29,5 +29,5 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		}
 	}
 
-	return fakeHead.Next
+	return preHead.Next
 }

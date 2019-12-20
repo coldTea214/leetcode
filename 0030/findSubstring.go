@@ -1,10 +1,8 @@
 func findSubstring(s string, words []string) []int {
-	var res []int
-
 	sLen := len(s)
 	wordNum := len(words)
 	if sLen == 0 || wordNum == 0 || sLen < wordNum*len(words[0]) {
-		return res
+		return nil
 	}
 	wordLen := len(words[0])
 
@@ -14,6 +12,7 @@ func findSubstring(s string, words []string) []int {
 		sameWordNum[word]++
 	}
 
+	var res []int
 	for i := 0; i < wordLen; i++ {
 		// count 记录当前已经匹配了多少个 word
 		// sameWordCount[word] 记录针对某一个具体 word 匹配了多少次
@@ -25,6 +24,7 @@ func findSubstring(s string, words []string) []int {
 			word := s[right : right+wordLen]
 			right += wordLen
 
+			// 子串中出现了不存在的 word，就重新开始
 			num, ok := sameWordNum[word]
 			if !ok {
 				count = 0

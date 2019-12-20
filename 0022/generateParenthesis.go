@@ -1,19 +1,19 @@
 func generateParenthesis(n int) []string {
-	var res []string
-	doGenerate(n, 0, 0, "", &res)
-	return res
-}
+	var solutions []string
+	var doGenerate func(int, int, int, string)
+	doGenerate = func(n, lNum, rNum int, solution string) {
+		if lNum == n && rNum == n {
+			solutions = append(solutions, solution)
+			return
+		}
 
-func doGenerate(n, lNum, rNum int, cur string, res *[]string) {
-	if lNum == n && rNum == n {
-		*res = append(*res, cur)
-		return
+		if lNum < n {
+			doGenerate(n, lNum+1, rNum, solution+"(")
+		}
+		if rNum < lNum {
+			doGenerate(n, lNum, rNum+1, solution+")")
+		}
 	}
-
-	if lNum < n {
-		doGenerate(n, lNum+1, rNum, cur+"(", res)
-	}
-	if rNum < lNum {
-		doGenerate(n, lNum, rNum+1, cur+")", res)
-	}
+	doGenerate(n, 0, 0, "")
+	return solutions
 }
