@@ -1,3 +1,7 @@
+package main
+
+import "fmt"
+
 func firstMissingPositive(nums []int) int {
 	if len(nums) == 0 {
 		return 1
@@ -11,9 +15,6 @@ func firstMissingPositive(nums []int) int {
 			continue
 		}
 		nums[i], nums[k-1] = nums[k-1], nums[i]
-		if nums[i] == i+1 {
-			i++
-		}
 	}
 
 	for i := 0; i < len(nums); i++ {
@@ -22,4 +23,10 @@ func firstMissingPositive(nums []int) int {
 		}
 	}
 	return len(nums) + 1
+}
+
+func main() {
+	fmt.Println(firstMissingPositive([]int{1, 2, 0}))
+	fmt.Println(firstMissingPositive([]int{3, 4, -1, 1}))
+	fmt.Println(firstMissingPositive([]int{7, 8, 9, 11, 12}))
 }

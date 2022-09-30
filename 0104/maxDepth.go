@@ -1,17 +1,15 @@
 func maxDepth(root *TreeNode) int {
-	var max int
-	inorderTraversal(root, 0, &max)
-	return max
+	if root == nil {
+		return 0
+	}
+	leftMax := maxDepth(root.Left)
+	rightMax := maxDepth(root.Right)
+	return max(leftMax, rightMax) + 1
 }
 
-func inorderTraversal(root *TreeNode, depth int, max *int) {
-	if root == nil {
-		if depth > *max {
-			*max = depth
-		}
-		return
+func max(a, b int) int {
+	if a > b {
+		return a
 	}
-
-	inorderTraversal(root.Left, depth+1, max)
-	inorderTraversal(root.Right, depth+1, max)
+	return b
 }

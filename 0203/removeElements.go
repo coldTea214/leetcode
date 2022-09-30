@@ -1,7 +1,7 @@
 func removeElements(head *ListNode, val int) *ListNode {
-	headPre := ListNode{Next: head}
+	preHead := ListNode{Next: head}
 
-	cur := &headPre
+	cur := &preHead
 	for cur.Next != nil {
 		if cur.Next.Val == val {
 			cur.Next = cur.Next.Next
@@ -10,5 +10,5 @@ func removeElements(head *ListNode, val int) *ListNode {
 		}
 	}
 
-	return headPre.Next
+	return preHead.Next
 }

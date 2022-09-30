@@ -4,18 +4,18 @@ func maxPathSum(root *TreeNode) int {
 	}
 
 	maxSum := root.Val
-	findMaxSum(root, &maxSum)
+	maxPathSumHelper(root, &maxSum)
 	return maxSum
 }
 
 // 返回的是以 root 为"起点"，最大路径和
-func findMaxSum(root *TreeNode, maxSum *int) int {
+func maxPathSumHelper(root *TreeNode, maxSum *int) int {
 	if root == nil {
 		return 0
 	}
 
-	left := max(0, findMaxSum(root.Left, maxSum))
-	right := max(0, findMaxSum(root.Right, maxSum))
+	left := max(0, maxPathSumHelper(root.Left, maxSum))
+	right := max(0, maxPathSumHelper(root.Right, maxSum))
 	sum := left + root.Val + right
 	if *maxSum < sum {
 		*maxSum = sum

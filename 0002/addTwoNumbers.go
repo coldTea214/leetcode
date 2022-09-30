@@ -5,7 +5,6 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	var carry int
 	for l1 != nil || l2 != nil {
 		var digit1, digit2 int
-
 		if l1 != nil {
 			digit1 = l1.Val
 			l1 = l1.Next

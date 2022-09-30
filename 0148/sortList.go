@@ -1,29 +1,30 @@
+// 类似题 0023
 func sortList(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}
 
 	left, right := split(head)
-	return merge(sortList(left), sortList(right))
+	return merge2Lists(sortList(left), sortList(right))
 }
 
 func split(head *ListNode) (left, right *ListNode) {
 	slow, fast := head, head
-	var slowPre *ListNode
+	var preSlow *ListNode
 
 	for fast != nil && fast.Next != nil {
-		slowPre, slow = slow, slow.Next
+		preSlow, slow = slow, slow.Next
 		fast = fast.Next.Next
 	}
 
-	slowPre.Next = nil
+	preSlow.Next = nil
 	left, right = head, slow
 	return
 }
 
-func merge(left, right *ListNode) *ListNode {
+func merge2Lists(left, right *ListNode) *ListNode {
 	cur := &ListNode{}
-	headPre := cur
+	preHead := cur
 	for left != nil && right != nil {
 		if left.Val < right.Val {
 			cur.Next, left = left, left.Next
@@ -39,5 +40,5 @@ func merge(left, right *ListNode) *ListNode {
 		cur.Next = left
 	}
 
-	return headPre.Next
+	return preHead.Next
 }

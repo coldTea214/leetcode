@@ -1,3 +1,7 @@
+package main
+
+import "fmt"
+
 var numberToLetter = map[byte][]string{
 	'2': []string{"a", "b", "c"},
 	'3': []string{"d", "e", "f"},
@@ -11,19 +15,23 @@ var numberToLetter = map[byte][]string{
 
 func letterCombinations(digits string) []string {
 	var words []string
-	var generateWords func(string, string)
-	generateWords = func(digits, word string) {
-		if digits == "" {
-			if word != "" {
-				words = append(words, word)
-			}
-			return
-		}
-
-		for _, letter := range numberToLetter[digits[0]] {
-			generateWords(digits[1:], word+letter)
-		}
-	}
-	generateWords(digits, "")
+	doGenerateWords(digits, "", &words)
 	return words
+}
+
+func doGenerateWords(digits, word string, words *[]string) {
+	if digits == "" {
+		if word != "" {
+			*words = append(*words, word)
+		}
+		return
+	}
+
+	for _, letter := range numberToLetter[digits[0]] {
+		doGenerateWords(digits[1:], word+letter, words)
+	}
+}
+
+func main() {
+	fmt.Println(letterCombinations("23"))
 }

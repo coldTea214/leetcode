@@ -5,7 +5,7 @@ func merge(intervals [][]int) [][]int {
 		return intervals
 	}
 
-	sort.Slice(intervals, func(i int, j int) bool {
+	sort.Slice(intervals, func(i, j int) bool {
 		return intervals[i][0] < intervals[j][0]
 	})
 

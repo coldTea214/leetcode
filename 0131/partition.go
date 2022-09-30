@@ -1,21 +1,24 @@
+package main
+
+import "fmt"
+
 func partition(s string) [][]string {
 	solutions := [][]string{}
-	solution := make([]string, 0, len(s))
-	findPartition(s, 0, solution, &solutions)
+	doPartition(s, []string{}, &solutions)
 	return solutions
 }
 
-func findPartition(s string, i int, cur []string, solutions *[][]string) {
-	if i == len(s) {
-		deepcopy := make([]string, len(cur))
-		copy(deepcopy, cur)
+func doPartition(s string, solution []string, solutions *[][]string) {
+	if len(s) == 0 {
+		deepcopy := make([]string, len(solution))
+		copy(deepcopy, solution)
 		*solutions = append(*solutions, deepcopy)
 		return
 	}
 
-	for j := i; j < len(s); j++ {
-		if isPalindrome(s[i : j+1]) {
-			findPartition(s, j+1, append(cur, s[i:j+1]), solutions)
+	for i := 0; i < len(s); i++ {
+		if isPalindrome(s[:i+1]) {
+			doPartition(s[i+1:], append(solution, s[:i+1]), solutions)
 		}
 	}
 }
@@ -27,4 +30,8 @@ func isPalindrome(s string) bool {
 		}
 	}
 	return true
+}
+
+func main() {
+	fmt.Println(partition("aab"))
 }

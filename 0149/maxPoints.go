@@ -23,8 +23,8 @@ func maxPoints(points [][]int) int {
 	}
 
 	max := 0
-	for i := 0; i < pointNum-1; i++ {
-		for j := i + 1; j < pointNum; j++ {
+	for i := 0; i < len(newPoints)-1; i++ {
+		for j := i + 1; j < len(newPoints); j++ {
 			count := 0
 			for k := 0; k < pointNum; k++ {
 				if isSameLine(newPoints[i], newPoints[j], newPoints[k]) {

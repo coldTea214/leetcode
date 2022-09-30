@@ -1,30 +1,33 @@
-func permuteUnique(nums []int) [][]int {
-	permutation := make([]int, len(nums))
-	numInPermutation := make([]bool, len(nums))
+package main
 
+import "fmt"
+
+func permuteUnique(nums []int) [][]int {
+	numInPermutation := make(map[int]bool)
 	var permutations [][]int
-	makePermutation(0, nums, permutation, numInPermutation, &permutations)
+	doPermuteUnique(nums, numInPermutation, []int{}, &permutations)
 	return permutations
 }
 
-func makePermutation(idx int, nums, permutation []int, numInPermutation []bool, permutations *[][]int) {
-	if idx == len(nums) {
+func doPermuteUnique(nums []int, numInPermutation map[int]bool, permutation []int, permutations *[][]int) {
+	if len(permutation) == len(nums) {
 		deepcopy := make([]int, len(nums))
 		copy(deepcopy, permutation)
 		*permutations = append(*permutations, deepcopy)
 		return
 	}
 
-	numInPermutationAtIdx := make(map[int]bool, len(nums))
+	numInPermutationThisLevel := make(map[int]bool)
 	for i := 0; i < len(nums); i++ {
-		if !numInPermutation[i] && !numInPermutationAtIdx[nums[i]] {
-			numInPermutation[i] = true
-			numInPermutationAtIdx[nums[i]] = true
-
-			permutation[idx] = nums[i]
-			makePermutation(idx+1, nums, permutation, numInPermutation, permutations)
-
-			numInPermutation[i] = false
+		if !numInPermutation[nums[i]] && !numInPermutationThisLevel[nums[i]] {
+			numInPermutation[nums[i]] = true
+			numInPermutationThisLevel[nums[i]] = true
+			doPermuteUnique(nums, numInPermutation, append(permutation, nums[i]), permutations)
+			numInPermutation[nums[i]] = false
 		}
 	}
+}
+
+func main() {
+	fmt.Println(permuteUnique([]int{1, 1, 2}))
 }

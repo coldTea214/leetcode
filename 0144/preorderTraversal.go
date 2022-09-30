@@ -1,15 +1,16 @@
+// 前置题 0094
 // 递归版本
 func preorderTraversal(root *TreeNode) []int {
 	var res []int
-	doPreorderTraversal(root, &res)
+	preorderTraversalHelper(root, &res)
 	return res
 }
 
-func doPreorderTraversal(root *TreeNode, res *[]int) {
+func preorderTraversalHelper(root *TreeNode, res *[]int) {
 	if root != nil {
 		*res = append(*res, root.Val)
-		doPreorderTraversal(root.Left, res)
-		doPreorderTraversal(root.Right, res)
+		preorderTraversalHelper(root.Left, res)
+		preorderTraversalHelper(root.Right, res)
 	}
 }
 
@@ -32,20 +33,20 @@ func (s *Stack) pop() *TreeNode {
 	return end
 }
 
-func preorderTraversal(root *TreeNode) []int {
+func preorderTraversal2(root *TreeNode) []int {
+	var res []int
 	var stack Stack
 	stack.push(root)
 
-	var res []int
 	for !stack.isEmpty() {
-		end := stack.pop()
-		if end == nil {
+		node := stack.pop()
+		if node == nil {
 			continue
 		}
 
-		res = append(res, end.Val)
-		stack.push(end.Right)
-		stack.push(end.Left)
+		res = append(res, node.Val)
+		stack.push(node.Right)
+		stack.push(node.Left)
 	}
 	return res
 }

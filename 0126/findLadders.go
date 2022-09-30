@@ -41,7 +41,7 @@ func findLadders(beginWord string, endWord string, words []string) [][]string {
 			qLen := queue.length()
 			// wordsInLevelN 记录出现在第 N 层的 word
 			// 既要处理好：abc -> abe,adc -> ade 这种同长度同终点两路径的情况
-			// 也要防止 ade 在第 3 层入队两次，会超时，T_T
+			// 也要防止 ade 在第 3 层入队两次，会超时
 			wordsInLevelN := make(map[string]bool)
 			for i := 0; i < qLen; i++ {
 				front := queue.dequeue()

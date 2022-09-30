@@ -1,15 +1,15 @@
 func isBalanced(root *TreeNode) bool {
-	_, isBalanced := doIsBalanced(root)
+	_, isBalanced := isBalancedHelper(root)
 	return isBalanced
 }
 
-func doIsBalanced(root *TreeNode) (int, bool) {
+func isBalancedHelper(root *TreeNode) (int, bool) {
 	if root == nil {
 		return 0, true
 	}
 
-	leftDepth, leftIsBalanced := doIsBalanced(root.Left)
-	rightDepth, rightIsBalanced := doIsBalanced(root.Right)
+	leftDepth, leftIsBalanced := isBalancedHelper(root.Left)
+	rightDepth, rightIsBalanced := isBalancedHelper(root.Right)
 
 	if leftIsBalanced && rightIsBalanced &&
 		-1 <= leftDepth-rightDepth && leftDepth-rightDepth <= 1 {

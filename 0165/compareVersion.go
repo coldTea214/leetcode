@@ -1,4 +1,7 @@
+package main
+
 import (
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -40,4 +43,8 @@ func toSameLen(v1s, v2s []int) ([]int, []int) {
 
 	v2s, newV1s := toSameLen(v2s, v1s)
 	return newV1s, v2s
+}
+
+func main() {
+	fmt.Println(compareVersion("1.0", "1.0.1"))
 }

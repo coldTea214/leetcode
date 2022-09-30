@@ -7,7 +7,7 @@ import "math"
 对应的 dp 为：
 7   5   2 max
 6   11  5 max
-1   1   6 max
+1   1   6 1
 max max 1 max
 */
 func calculateMinimumHP(dungeon [][]int) int {
@@ -20,13 +20,12 @@ func calculateMinimumHP(dungeon [][]int) int {
 		return 1
 	}
 
-	intMax := math.MaxInt32
 	// dp[i][j] 到达 (i,j) 前的健康值
 	dp := make([][]int, m+1)
 	for i := range dp {
 		dp[i] = make([]int, n+1)
 		for j := range dp[i] {
-			dp[i][j] = intMax
+			dp[i][j] = math.MaxInt32
 		}
 	}
 
@@ -38,7 +37,6 @@ func calculateMinimumHP(dungeon [][]int) int {
 			dp[i][j] = max(health, 1)
 		}
 	}
-
 	return dp[0][0]
 }
 

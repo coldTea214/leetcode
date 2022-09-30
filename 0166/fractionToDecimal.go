@@ -13,16 +13,16 @@ func fractionToDecimal(numerator int, denominator int) string {
 		isNegative = true
 	}
 
-	res := doFractionToDecimal(abs(numerator), abs(denominator))
+	res := fractionToDecimalHelper(abs(numerator), abs(denominator))
 	if isNegative {
 		return "-" + res
 	}
 	return res
 }
 
-func doFractionToDecimal(numerator, denominator int) string {
+func fractionToDecimalHelper(numerator, denominator int) string {
 	if numerator >= denominator {
-		decimalPart := doFractionToDecimal(numerator%denominator, denominator)
+		decimalPart := fractionToDecimalHelper(numerator%denominator, denominator)
 		return strconv.Itoa(numerator/denominator) + decimalPart[1:]
 	}
 

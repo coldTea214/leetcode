@@ -1,3 +1,11 @@
+package main
+
+import "fmt"
+
+// input:    [1 3 -1 -3  5  3 6 7] 3
+// leftMax:  [1 3  3 -3  5  5 6 7]
+// rightMax:      [1  3 -1 -3 6 6 6 7]
+// res:           [3  3  5  5 6 7]
 func maxSlidingWindow(nums []int, k int) []int {
 	if k <= 1 {
 		return nums
@@ -35,4 +43,8 @@ func max(a, b int) int {
 		return a
 	}
 	return b
+}
+
+func main() {
+	fmt.Println(maxSlidingWindow([]int{1, 3, -1, -3, 5, 3, 6, 7}, 3))
 }

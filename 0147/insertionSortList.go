@@ -1,5 +1,5 @@
 func insertionSortList(head *ListNode) *ListNode {
-	headPre := &ListNode{Next: head}
+	preHead := &ListNode{Next: head}
 
 	cur := head
 	for cur != nil && cur.Next != nil {
@@ -11,7 +11,7 @@ func insertionSortList(head *ListNode) *ListNode {
 
 		cur.Next = needInsert.Next
 
-		pre, next := headPre, headPre.Next
+		pre, next := preHead, preHead.Next
 		for next.Val < needInsert.Val {
 			pre = next
 			next = next.Next
@@ -21,5 +21,5 @@ func insertionSortList(head *ListNode) *ListNode {
 		needInsert.Next = next
 	}
 
-	return headPre.Next
+	return preHead.Next
 }

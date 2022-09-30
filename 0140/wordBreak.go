@@ -1,3 +1,7 @@
+package main
+
+import "fmt"
+
 func wordBreak(s string, wordDict []string) []string {
 	wordExist := make(map[string]bool, len(wordDict))
 	sizes := make(map[int]bool)
@@ -25,21 +29,25 @@ func wordBreak(s string, wordDict []string) []string {
 	}
 
 	var res []string
+	doWordBreak(s, sizes, wordExist, "", &res)
+	return res
+}
 
-	var doWordBreak func(int, string)
-	doWordBreak = func(i int, str string) {
-		if i == len(s) {
-			res = append(res, str[1:])
-			return
-		}
+func doWordBreak(s string, sizes map[int]bool, wordExist map[string]bool, str string, res *[]string) {
+	if len(s) == 0 {
+		*res = append(*res, str[1:])
+		return
+	}
 
-		for size := range sizes {
-			if i+size <= len(s) && wordExist[s[i:i+size]] {
-				doWordBreak(i+size, str+" "+s[i:i+size])
-			}
+	for size := range sizes {
+		if size <= len(s) && wordExist[s[:size]] {
+			doWordBreak(s[size:], sizes, wordExist, str+" "+s[:size], res)
 		}
 	}
-	doWordBreak(0, "")
+}
 
-	return res
+func main() {
+	s := "catsanddog"
+	wordDict := []string{"cat", "cats", "and", "sand", "dog"}
+	fmt.Println(wordBreak(s, wordDict))
 }

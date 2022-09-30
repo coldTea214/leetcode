@@ -1,6 +1,5 @@
 func nthUglyNumber(n int) int {
 	factors := [3]int{2, 3, 5}
-	// uglyNum = 2^count[0]*3^count[1]*5^count[2]
 	count := []int{0, 0, 0}
 	// candidates[0]: [1x2], 2x2, [2x2], 3x2, [3x2],[4x2], 5x2...
 	// candidates[1]:  1x3, [1x3], 2x3,  2x3, [2x3], 3x3, [3x3]...

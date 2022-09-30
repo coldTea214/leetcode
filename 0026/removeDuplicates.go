@@ -1,15 +1,21 @@
-func removeDuplicates(nums []int) int {
-	if len(nums) <= 1 {
-		return len(nums)
-	}
+package main
 
-	slow := 0
-	for quick := 1; quick < len(nums); quick++ {
-		if nums[slow] == nums[quick] {
+import "fmt"
+
+func removeDuplicates(nums []int) int {
+	slow := 1
+	for quick := slow; quick < len(nums); quick++ {
+		if nums[quick] == nums[slow-1] {
 			continue
 		}
+		nums[slow] = nums[quick]
 		slow++
-		nums[slow], nums[quick] = nums[quick], nums[slow]
 	}
-	return slow + 1
+	return slow
+}
+
+func main() {
+	nums := []int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}
+	idx := removeDuplicates(nums)
+	fmt.Println(nums[:idx])
 }

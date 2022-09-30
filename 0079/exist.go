@@ -3,12 +3,10 @@ func exist(board [][]byte, word string) bool {
 	if row == 0 {
 		return false
 	}
-
 	col := len(board[0])
 	if col == 0 {
 		return false
 	}
-
 	if len(word) == 0 {
 		return false
 	}
@@ -20,7 +18,7 @@ func exist(board [][]byte, word string) bool {
 
 	for i := 0; i < row; i++ {
 		for j := 0; j < col; j++ {
-			if dfs(i, j, row, col, 0, word, board, visited) {
+			if doExist(i, j, row, col, 0, word, board, visited) {
 				return true
 			}
 		}
@@ -29,7 +27,7 @@ func exist(board [][]byte, word string) bool {
 	return false
 }
 
-func dfs(curRow, curCol, row, col, count int, word string, board [][]byte, visited [][]bool) bool {
+func doExist(curRow, curCol, row, col, count int, word string, board [][]byte, visited [][]bool) bool {
 	if count == len(word) {
 		return true
 	}
@@ -42,10 +40,10 @@ func dfs(curRow, curCol, row, col, count int, word string, board [][]byte, visit
 
 	visited[curRow][curCol] = true
 
-	if dfs(curRow-1, curCol, row, col, count+1, word, board, visited) ||
-		dfs(curRow+1, curCol, row, col, count+1, word, board, visited) ||
-		dfs(curRow, curCol-1, row, col, count+1, word, board, visited) ||
-		dfs(curRow, curCol+1, row, col, count+1, word, board, visited) {
+	if doExist(curRow-1, curCol, row, col, count+1, word, board, visited) ||
+		doExist(curRow+1, curCol, row, col, count+1, word, board, visited) ||
+		doExist(curRow, curCol-1, row, col, count+1, word, board, visited) ||
+		doExist(curRow, curCol+1, row, col, count+1, word, board, visited) {
 		return true
 	}
 

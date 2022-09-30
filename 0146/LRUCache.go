@@ -1,45 +1,106 @@
-import "container/list"
+package main
+
+import "fmt"
 
 type LRUCache struct {
-	cap     int
-	data    *list.List
-	dataLoc map[int]*list.Element
+	capacity int
+	data     *DoublyLinkedList
+	dataLoc  map[int]*DoublyLinkedListNode
 }
 
-type ElementData struct {
-	key   int
-	value int
+type DoublyLinkedList struct {
+	root *DoublyLinkedListNode
+}
+
+type DoublyLinkedListNode struct {
+	key, value int
+	prev, next *DoublyLinkedListNode
 }
 
 func Constructor(capacity int) LRUCache {
 	return LRUCache{
-		cap:     capacity,
-		data:    list.New(),
-		dataLoc: make(map[int]*list.Element, capacity),
+		capacity: capacity,
+		data:     NewDoublyLinkedList(),
+		dataLoc:  make(map[int]*DoublyLinkedListNode),
 	}
 }
 
-func (cache *LRUCache) Get(key int) int {
-	if dataPtr, ok := cache.dataLoc[key]; ok {
-		val := dataPtr.Value.(*ElementData).value
-		cache.data.MoveToFront(dataPtr)
-		return val
+func (lru *LRUCache) Get(key int) int {
+	node, ok := lru.dataLoc[key]
+	if !ok {
+		return -1
 	}
-	return -1
+	lru.data.MoveToFront(node)
+	return node.value
 }
 
-func (cache *LRUCache) Put(key int, value int) {
-	if dataPtr, ok := cache.dataLoc[key]; ok {
-		cache.data.MoveToFront(dataPtr)
-		dataPtr.Value.(*ElementData).value = value
+func (lru *LRUCache) Put(key int, value int) {
+	if node, ok := lru.dataLoc[key]; ok {
+		lru.data.MoveToFront(node)
+		node.value = value
 	} else {
-		if cache.data.Len() == cache.cap {
-			back := cache.data.Remove(cache.data.Back())
-			delete(cache.dataLoc, back.(*ElementData).key)
+		if len(lru.dataLoc) == lru.capacity {
+			back := lru.data.Back()
+			lru.data.Remove(back)
+			delete(lru.dataLoc, back.key)
 		}
-
-		data := &ElementData{key: key, value: value}
-		dataPtr := cache.data.PushFront(data)
-		cache.dataLoc[key] = dataPtr
+		node := &DoublyLinkedListNode{key: key, value: value}
+		lru.data.PushFront(node)
+		lru.dataLoc[key] = node
 	}
+}
+
+func NewDoublyLinkedList() *DoublyLinkedList {
+	list := &DoublyLinkedList{
+		root: &DoublyLinkedListNode{},
+	}
+	list.root.next = list.root
+	list.root.prev = list.root
+	return list
+}
+
+func (list *DoublyLinkedList) MoveToFront(node *DoublyLinkedListNode) {
+	if list.root.next == node {
+		return
+	}
+	node.prev.next = node.next
+	node.next.prev = node.prev
+	node.prev = list.root
+	node.next = list.root.next
+	node.prev.next = node
+	node.next.prev = node
+}
+
+func (list *DoublyLinkedList) Back() *DoublyLinkedListNode {
+	if list.root.prev == list.root {
+		return nil
+	}
+	return list.root.prev
+}
+
+func (list *DoublyLinkedList) Remove(node *DoublyLinkedListNode) {
+	node.prev.next = node.next
+	node.next.prev = node.prev
+	node.next = nil
+	node.prev = nil
+}
+
+func (list *DoublyLinkedList) PushFront(node *DoublyLinkedListNode) {
+	node.prev = list.root
+	node.next = list.root.next
+	node.prev.next = node
+	node.next.prev = node
+}
+
+func main() {
+	lru := Constructor(2)
+	lru.Put(1, 1)
+	lru.Put(2, 2)
+	fmt.Println(lru.Get(1)) // 返回1
+	lru.Put(3, 3)
+	fmt.Println(lru.Get(2)) // 返回-1
+	lru.Put(4, 4)
+	fmt.Println(lru.Get(1)) // 返回-1
+	fmt.Println(lru.Get(3)) // 返回3
+	fmt.Println(lru.Get(4)) // 返回4
 }

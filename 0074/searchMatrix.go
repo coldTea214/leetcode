@@ -14,32 +14,28 @@ func searchMatrix(matrix [][]int, target int) bool {
 	}
 
 	// 寻找行
-	foundRow := false
 	r, i, j := 0, 0, m-1
-	for i <= j && !foundRow {
+	for i <= j {
 		r = (i + j) / 2
-		switch {
-		case matrix[r][n-1] < target:
+		if matrix[r][n-1] < target {
 			i = r + 1
-		case matrix[r][0] > target:
+		} else if matrix[r][0] > target {
 			j = r - 1
-		default:
-			foundRow = true
+		} else {
+			break
 		}
 	}
 
 	c, i, j := 0, 0, n-1
 	for i <= j {
 		c = (i + j) / 2
-		switch {
-		case matrix[r][c] < target:
+		if matrix[r][c] < target {
 			i = c + 1
-		case target < matrix[r][c]:
+		} else if target < matrix[r][c] {
 			j = c - 1
-		default:
+		} else {
 			return true
 		}
 	}
-
-	return matrix[r][c] == target
+	return false
 }

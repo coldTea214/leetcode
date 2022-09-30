@@ -11,6 +11,6 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 		}
 	}
 	if j >= 0 {
-		copy(nums1[:j+1], nums2[:j+1])
+		copy(nums1, nums2[:j+1])
 	}
 }

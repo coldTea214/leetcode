@@ -1,11 +1,10 @@
 func pathSum(root *TreeNode, sum int) [][]int {
 	var res [][]int
-	var path []int
-	findPath(root, sum, path, &res)
+	doPathSum(root, sum, []int{}, &res)
 	return res
 }
 
-func findPath(root *TreeNode, sum int, path []int, res *[][]int) {
+func doPathSum(root *TreeNode, sum int, path []int, res *[][]int) {
 	if root == nil {
 		return
 	}
@@ -20,6 +19,6 @@ func findPath(root *TreeNode, sum int, path []int, res *[][]int) {
 		}
 	}
 
-	findPath(root.Left, sum, append(path, root.Val), res)
-	findPath(root.Right, sum, append(path, root.Val), res)
+	doPathSum(root.Left, sum, append(path, root.Val), res)
+	doPathSum(root.Right, sum, append(path, root.Val), res)
 }

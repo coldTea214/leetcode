@@ -15,7 +15,7 @@ func multiply(num1 string, num2 string) string {
 
 	for i := len(resInt) - 1; i > 0; i-- {
 		resInt[i-1] += resInt[i] / 10
-		resInt[i] = resInt[i] % 10
+		resInt[i] %= 10
 	}
 
 	if resInt[0] == 0 {

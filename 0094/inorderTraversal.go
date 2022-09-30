@@ -1,19 +1,19 @@
 // 递归版本
 func inorderTraversal(root *TreeNode) []int {
 	var res []int
-	doInorderTraversal(root, &res)
+	inorderTraversalHelper(root, &res)
 	return res
 }
 
-func doInorderTraversal(root *TreeNode, res *[]int) {
+func inorderTraversalHelper(root *TreeNode, res *[]int) {
 	if root != nil {
-		doInorderTraversal(root.Left, res)
+		inorderTraversalHelper(root.Left, res)
 		*res = append(*res, root.Val)
-		doInorderTraversal(root.Right, res)
+		inorderTraversalHelper(root.Right, res)
 	}
 }
 
-// 非递归版本
+// 迭代版本
 type Stack struct {
 	nodes []*TreeNode
 }
@@ -32,9 +32,10 @@ func (s *Stack) pop() *TreeNode {
 	return node
 }
 
-func inorderTraversal(root *TreeNode) []int {
+func inorderTraversal2(root *TreeNode) []int {
 	var res []int
 	var stack Stack
+
 	for root != nil || !stack.isEmpty() {
 		for root != nil {
 			stack.push(root)
@@ -42,9 +43,9 @@ func inorderTraversal(root *TreeNode) []int {
 		}
 
 		if !stack.isEmpty() {
-			top := stack.pop()
-			res = append(res, top.Val)
-			root = top.Right
+			node := stack.pop()
+			res = append(res, node.Val)
+			root = node.Right
 		}
 	}
 	return res

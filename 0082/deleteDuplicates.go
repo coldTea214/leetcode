@@ -1,3 +1,26 @@
+// 前置题 0083
+// 迭代
+func deleteDuplicates(head *ListNode) *ListNode {
+	if head == nil {
+		return head
+	}
+
+	preHead := &ListNode{0, head}
+	cur := preHead
+	for cur.Next != nil && cur.Next.Next != nil {
+		if cur.Next.Val == cur.Next.Next.Val {
+			val := cur.Next.Val
+			for cur.Next != nil && cur.Next.Val == val {
+				cur.Next = cur.Next.Next
+			}
+		} else {
+			cur = cur.Next
+		}
+	}
+	return preHead.Next
+}
+
+// 递归
 func deleteDuplicates(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
@@ -15,3 +38,4 @@ func deleteDuplicates(head *ListNode) *ListNode {
 	head.Next = deleteDuplicates(head.Next)
 	return head
 }
+

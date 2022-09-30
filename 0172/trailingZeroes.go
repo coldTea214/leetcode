@@ -1,3 +1,7 @@
+package main
+
+import "fmt"
+
 func trailingZeroes(n int) int {
 	res := 0
 
@@ -8,4 +12,8 @@ func trailingZeroes(n int) int {
 	}
 
 	return res
+}
+
+func main() {
+	fmt.Println(trailingZeroes(10))
 }

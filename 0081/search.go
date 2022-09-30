@@ -1,3 +1,4 @@
+// 前置题 0033
 func search(nums []int, target int) bool {
 	low, high := 0, len(nums)-1
 	for low <= high {

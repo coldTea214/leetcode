@@ -1,3 +1,5 @@
+// 单调栈
+// 时间复杂度 O(N): 每个元素只入栈、出栈一次
 func largestRectangleArea(heights []int) int {
 	heights = append([]int{-2}, heights...)
 	heights = append(heights, -1)

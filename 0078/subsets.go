@@ -1,18 +1,25 @@
+package main
+
+import "fmt"
+
 func subsets(nums []int) [][]int {
 	var result [][]int
-	var subset []int
-	findSubsets(nums, 0, subset, &result)
+	doFindSubsets(nums, []int{}, &result)
 	return result
 }
 
-func findSubsets(nums []int, count int, subset []int, result *[][]int) {
-	if count == len(nums) {
+func doFindSubsets(nums []int, subset []int, result *[][]int) {
+	if len(nums) == 0 {
 		deepcopy := make([]int, len(subset))
 		copy(deepcopy, subset)
 		*result = append(*result, deepcopy)
 		return
 	}
 
-	findSubsets(nums, count+1, subset, result)
-	findSubsets(nums, count+1, append(subset, nums[count]), result)
+	doFindSubsets(nums[1:], subset, result)
+	doFindSubsets(nums[1:], append(subset, nums[0]), result)
+}
+
+func main() {
+	fmt.Println(subsets([]int{1, 2, 3}))
 }

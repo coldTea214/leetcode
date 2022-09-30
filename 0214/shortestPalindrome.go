@@ -1,3 +1,5 @@
+// 更常见的应该还是 manacher 算法
+
 func shortestPalindrome(s string) string {
 	if len(s) <= 1 {
 		return s

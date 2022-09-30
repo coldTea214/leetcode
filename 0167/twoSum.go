@@ -2,12 +2,11 @@ func twoSum(numbers []int, target int) []int {
 	low, high := 0, len(numbers)-1
 	for low < high {
 		sum := numbers[low] + numbers[high]
-		switch {
-		case sum == target:
+		if sum == target {
 			return []int{low + 1, high + 1}
-		case sum < target:
+		} else if sum < target {
 			low++
-		case sum > target:
+		} else {
 			high--
 		}
 	}

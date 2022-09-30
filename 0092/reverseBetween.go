@@ -1,33 +1,32 @@
+// 前置题 0206
 func reverseBetween(head *ListNode, m int, n int) *ListNode {
 	if m == n {
 		return head
 	}
 
-	fakeHead := &ListNode{Next: head}
-	m++
-	n++
+	preHead := &ListNode{Next: head}
 
-	mPre, mPtr, nNext := split(fakeHead, m, n)
+	preM, mPtr, nextN := split(preHead, m, n)
 	// x->1 2->3->4 5->NULL
 
-	h, e := reverse(mPtr)
+	newHead := reverse(mPtr)
 	// x->1 4->3->2 5->NULL
 
-	mPre.Next = h
-	e.Next = nNext
+	preM.Next = newHead
+	mPtr.Next = nextN
 	// x->1->4->3->2->5->NULL
 
-	return fakeHead.Next
+	return preHead.Next
 }
 
-func split(head *ListNode, m, n int) (mPre, mPtr, nNext *ListNode) {
+func split(head *ListNode, m, n int) (preM, mPtr, nextN *ListNode) {
 	for i := 1; head != nil; i++ {
-		if i == m-1 {
-			mPre = head
+		if i == m {
+			preM = head
 			mPtr = head.Next
 		}
-		if i == n {
-			nNext = head.Next
+		if i == n+1 {
+			nextN = head.Next
 			head.Next = nil
 			break
 		}
@@ -36,16 +35,15 @@ func split(head *ListNode, m, n int) (mPre, mPtr, nNext *ListNode) {
 	return
 }
 
-func reverse(head *ListNode) (h, e *ListNode) {
-	if head == nil || head.Next == nil {
-		return head, head
+func reverse(head *ListNode) (newHead *ListNode) {
+	var prev *ListNode
+
+	for head != nil {
+		next := head.Next
+		head.Next = prev
+		prev = head
+		head = next
 	}
 
-	var end *ListNode
-
-	h, end = reverse(head.Next)
-	end.Next = head
-	e = head
-
-	return
+	return prev
 }

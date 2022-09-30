@@ -1,14 +1,14 @@
 // 递归版本
 func postorderTraversal(root *TreeNode) []int {
 	var res []int
-	doPostorderTraversal(root, &res)
+	postorderTraversalHelper(root, &res)
 	return res
 }
 
-func doPostorderTraversal(root *TreeNode, res *[]int) {
+func postorderTraversalHelper(root *TreeNode, res *[]int) {
 	if root != nil {
-		doPostorderTraversal(root.Left, res)
-		doPostorderTraversal(root.Right, res)
+		postorderTraversalHelper(root.Left, res)
+		postorderTraversalHelper(root.Right, res)
 		*res = append(*res, root.Val)
 	}
 }
@@ -34,29 +34,28 @@ func (s *Stack) pop() {
 	s.nodes = s.nodes[:len(s.nodes)-1]
 }
 
-// 当前节点被读取的条件为：无左右孩子，或者上一次读取的为其左右孩子。
-func postorderTraversal(root *TreeNode) []int {
+func postorderTraversal2(root *TreeNode) []int {
 	var res []int
-	if root == nil {
-		return res
-	}
 	var stack Stack
 	stack.push(root)
 	var pre, cur *TreeNode
+
 	for !stack.isEmpty() {
 		cur = stack.top()
+		if cur == nil {
+			stack.pop()
+			continue
+		}
+
+		// 当前节点被读取的条件为：无左右孩子，或者上一次读取的为其左右孩子。
 		if (cur.Left == nil && cur.Right == nil) ||
 			(pre != nil && (pre == cur.Left || pre == cur.Right)) {
 			res = append(res, cur.Val)
 			stack.pop()
 			pre = cur
 		} else {
-			if cur.Right != nil {
-				stack.push(cur.Right)
-			}
-			if cur.Left != nil {
-				stack.push(cur.Left)
-			}
+			stack.push(cur.Right)
+			stack.push(cur.Left)
 		}
 	}
 

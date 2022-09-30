@@ -32,7 +32,6 @@ func searchRange(nums []int, target int) []int {
 
 func search(nums []int, target int) int {
 	low, high := 0, len(nums)-1
-
 	for low <= high {
 		mid := (low + high) >> 1
 

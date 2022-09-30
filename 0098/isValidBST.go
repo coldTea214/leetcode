@@ -1,23 +1,14 @@
 func isValidBST(root *TreeNode) bool {
-	res := inorderTraversal(root)
-	for i := 1; i < len(res); i++ {
-		if res[i-1] >= res[i] {
-			return false
-		}
-	}
-	return true
+	return isValidBSTHelper(root, math.MinInt64, math.MaxInt64)	
 }
 
-func inorderTraversal(root *TreeNode) []int {
-	var res []int
-	doInorderTraversal(root, &res)
-	return res
+func isValidBSTHelper(root *TreeNode, min, max int) bool {
+	if root == nil {
+		return true
+	}
+	if root.Val <= lower || root.Val >= upper {
+		return false
+	}
+	return isValidBSTHelper(root.Left, min, root.Val) && isValidBSTHelper(root.Right, root.Val, max)
 }
 
-func doInorderTraversal(root *TreeNode, res *[]int) {
-	if root != nil {
-		doInorderTraversal(root.Left, res)
-		*res = append(*res, root.Val)
-		doInorderTraversal(root.Right, res)
-	}
-}
