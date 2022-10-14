@@ -44,14 +44,13 @@ func dfs(board [][]byte, i int, j int, trie *TrieNode, res *[]string) {
 	if i < 0 || i == len(board) || j < 0 || j == len(board[0]) {
 		return
 	}
-
 	c := board[i][j]
 	if c == '#' || trie.children[int(c-'a')] == nil {
 		return
 	}
 
 	trie = trie.children[int(c-'a')]
-	if len(trie.word) > 0 {
+	if trie.word != "" {
 		*res = append(*res, trie.word)
 		trie.word = ""
 	}

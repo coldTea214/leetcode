@@ -1,3 +1,4 @@
+// 前置题 0198
 func rob(nums []int) int {
 	switch len(nums) {
 	case 0:

@@ -1,45 +1,38 @@
-import "sort"
+package main
 
-type Pair struct {
-	val int
-	idx int
-}
+import (
+	"fmt"
+)
 
-func containsNearbyAlmostDuplicate(nums []int, k int, t int) bool {
-	if len(nums) < 2 {
-		return false
-	}
-	pairs := make([]*Pair, len(nums))
+func containsNearbyAlmostDuplicate(nums []int, k, t int) bool {
+	bucket := map[int]int{}
 	for i, num := range nums {
-		pairs[i] = &Pair{num, i}
-	}
-	sort.Slice(pairs, func(i, j int) bool {
-		if pairs[i].val != pairs[j].val {
-			return pairs[i].val < pairs[j].val
+		id := bucketID(num, t+1)
+		if _, ok := bucket[id]; ok {
+			return true
 		}
-		return pairs[i].idx < pairs[j].idx
-	})
-
-	i, j := 0, 1
-	for j < len(pairs) {
-		if pairs[j].val-pairs[i].val <= t {
-			if abs(pairs[j].idx-pairs[i].idx) <= k {
-				return true
-			}
-			j++
-		} else {
-			i++
-			if j <= i {
-				j++
-			}
+		if n, ok := bucket[id-1]; ok && num-n <= t {
+			return true
+		}
+		if n, ok := bucket[id+1]; ok && n-num <= t {
+			return true
+		}
+		bucket[id] = num
+		if i >= k {
+			delete(bucket, bucketID(nums[i-k], t+1))
 		}
 	}
 	return false
 }
 
-func abs(n int) int {
-	if n < 0 {
-		return -n
+func bucketID(num, width int) int {
+	if num >= 0 {
+		return num / width
 	}
-	return n
+	return (num+1)/width - 1
+}
+
+func main() {
+	// fmt.Println(containsNearbyAlmostDuplicate([]int{1, 5, 9, 1, 5, 9}, 2, 3))
+	fmt.Println(containsNearbyAlmostDuplicate([]int{1, 2, 1, 1}, 1, 0))
 }

@@ -1,3 +1,4 @@
+// 前置题 0169
 func majorityElement(nums []int) []int {
 	var count1, count2, candidate1, candidate2 int
 	for _, num := range nums {

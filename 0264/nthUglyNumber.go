@@ -1,9 +1,9 @@
 func nthUglyNumber(n int) int {
 	factors := [3]int{2, 3, 5}
 	count := []int{0, 0, 0}
-	// candidates[0]: [1x2], 2x2, [2x2], 3x2, [3x2],[4x2], 5x2...
-	// candidates[1]:  1x3, [1x3], 2x3,  2x3, [2x3], 3x3, [3x3]...
-	// candidates[2]:  1x5,  1x5,  1x5, [1x5], 2x5,  2x5,  2x5...
+	// candidates[0]: [1x2]  2x2  [2x2]  3x2  [3x2] [4x2]  5x2  [5*2] [6*2]
+	// candidates[1]:  1x3  [1x3]  2x3   2x3  [2x3]  3x3  [3x3]  4*3  [4*3]
+	// candidates[2]:  1x5   1x5   1x5  [1x5]  2x5   2x5   2x5  [2*5]  3*5
 	// 每个子列表都是一个丑数按顺序分别乘以 2，3，5
 	candidates := [3]int{2, 3, 5}
 

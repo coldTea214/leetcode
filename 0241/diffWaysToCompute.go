@@ -1,37 +1,41 @@
-import "strconv"
+package main
+
+import (
+	"fmt"
+	"strconv"
+)
 
 func diffWaysToCompute(input string) []int {
 	// 缓存已经计算过的字符串
 	calculated := make(map[string][]int)
-	var dfs func(string) []int
-	dfs = func(s string) []int {
-		res := make([]int, 0, len(s))
-		if t, ok := calculated[s]; ok {
-			return t
-		}
+	return diffWaysToComputeHelper(input, calculated)
+}
 
-		for i := range s {
-			if s[i] == '+' || s[i] == '-' || s[i] == '*' {
-				// 此时，s[i] 作为最后一个运算的运算符
-				for _, left := range dfs(s[:i]) {
-					for _, right := range dfs(s[i+1:]) {
-						res = append(res, operate(left, right, s[i]))
-					}
-				}
-			}
-		}
-
-		// s 中不存在运算符
-		if len(res) == 0 {
-			temp, _ := strconv.Atoi(s)
-			res = append(res, temp)
-		}
-
-		calculated[s] = res
+func diffWaysToComputeHelper(s string, calculated map[string][]int) []int {
+	if res, ok := calculated[s]; ok {
 		return res
 	}
 
-	return dfs(input)
+	var res []int
+	for i := range s {
+		if s[i] == '+' || s[i] == '-' || s[i] == '*' {
+			// 把 s[i] 作为最后一个运算的运算符
+			for _, left := range diffWaysToComputeHelper(s[:i], calculated) {
+				for _, right := range diffWaysToComputeHelper(s[i+1:], calculated) {
+					res = append(res, operate(left, right, s[i]))
+				}
+			}
+		}
+	}
+
+	// s 中不存在运算符
+	if len(res) == 0 {
+		tmp, _ := strconv.Atoi(s)
+		res = append(res, tmp)
+	}
+
+	calculated[s] = res
+	return res
 }
 
 func operate(a, b int, opt byte) int {
@@ -43,4 +47,9 @@ func operate(a, b int, opt byte) int {
 	default:
 		return a * b
 	}
+}
+
+func main() {
+	// [-34 -10 -14 -10 10]
+	fmt.Println(diffWaysToCompute("2*3-4*5"))
 }

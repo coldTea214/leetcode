@@ -4,6 +4,7 @@ func calculate(s string) int {
 	for i := 0; i < len(s); i++ {
 		if '0' <= s[i] && s[i] <= '9' {
 			num = num*10 + int(s[i]-'0')
+			continue
 		}
 		if s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/' || i == len(s)-1 {
 			switch op {

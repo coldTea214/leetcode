@@ -19,6 +19,5 @@ func numSquares(n int) int {
 			}
 		}
 	}
-
 	return dp[n]
 }
