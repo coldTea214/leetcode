@@ -19,11 +19,11 @@ func doPermuteUnique(nums []int, numInPermutation map[int]bool, permutation []in
 
 	numInPermutationThisLevel := make(map[int]bool)
 	for i := 0; i < len(nums); i++ {
-		if !numInPermutation[nums[i]] && !numInPermutationThisLevel[nums[i]] {
-			numInPermutation[nums[i]] = true
+		if !numInPermutation[i] && !numInPermutationThisLevel[nums[i]] {
+			numInPermutation[i] = true
 			numInPermutationThisLevel[nums[i]] = true
 			doPermuteUnique(nums, numInPermutation, append(permutation, nums[i]), permutations)
-			numInPermutation[nums[i]] = false
+			numInPermutation[i] = false
 		}
 	}
 }
