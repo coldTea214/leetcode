@@ -39,7 +39,8 @@ func maxPoints(points [][]int) int {
 	return max
 }
 
-// 判断向量(p1-->p2)和向量(p1-->p3)的斜率是否相等
+// 判断向量 (p1->p2) 和向量 (p1->p3) 的斜率是否相等
 func isSameLine(p1, p2, p3 Point) bool {
+	// 即 (p3.x-p1.x)/(p2.x-p1.x)==(p3.y-p1.y)/(p2.y-p1.y) 的除0安全格式
 	return (p3.x-p1.x)*(p2.y-p1.y) == (p2.x-p1.x)*(p3.y-p1.y)
 }

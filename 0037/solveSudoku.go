@@ -1,3 +1,4 @@
+// dfs
 func solveSudoku(board [][]byte) {
 	var appearInRow, appearInCol, appearInBlock [9][10]bool
 	for i := range board {
@@ -13,17 +14,17 @@ func solveSudoku(board [][]byte) {
 		}
 	}
 
-	doSolve(0, appearInRow, appearInCol, appearInBlock, board)
+	solveSudokuHelper(0, appearInRow, appearInCol, appearInBlock, board)
 }
 
-func doSolve(count int, appearInRow, appearInCol, appearInBlock [9][10]bool, board [][]byte) bool {
+func solveSudokuHelper(count int, appearInRow, appearInCol, appearInBlock [9][10]bool, board [][]byte) bool {
 	if count == 81 {
 		return true
 	}
 
 	row, col := count/9, count%9
 	if board[row][col] != '.' {
-		return doSolve(count+1, appearInRow, appearInCol, appearInBlock, board)
+		return solveSudokuHelper(count+1, appearInRow, appearInCol, appearInBlock, board)
 	}
 
 	for b := byte('1'); b <= '9'; b++ {
@@ -34,7 +35,7 @@ func doSolve(count int, appearInRow, appearInCol, appearInBlock [9][10]bool, boa
 
 		board[row][col] = b
 		appearInRow[row][num], appearInCol[col][num], appearInBlock[row/3*3+col/3][num] = true, true, true
-		if doSolve(count+1, appearInRow, appearInCol, appearInBlock, board) {
+		if solveSudokuHelper(count+1, appearInRow, appearInCol, appearInBlock, board) {
 			return true
 		}
 		appearInRow[row][num], appearInCol[col][num], appearInBlock[row/3*3+col/3][num] = false, false, false

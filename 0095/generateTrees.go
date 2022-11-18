@@ -1,23 +1,23 @@
 func generateTrees(n int) []*TreeNode {
-	return generateBinarySearchTree(1, n)
+	return generateTreesHelper(1, n)
 }
 
-func generateBinarySearchTree(start, end int) []*TreeNode {
-	tree := []*TreeNode{}
+func generateTreesHelper(start, end int) []*TreeNode {
+	trees := []*TreeNode{}
 	if start > end {
-		tree = append(tree, nil)
-		return tree
+		trees = append(trees, nil)
+		return trees
 	}
 
 	for i := start; i <= end; i++ {
-		left := generateBinarySearchTree(start, i-1)
-		right := generateBinarySearchTree(i+1, end)
+		left := generateTreesHelper(start, i-1)
+		right := generateTreesHelper(i+1, end)
 		for _, l := range left {
 			for _, r := range right {
 				root := &TreeNode{Val: i, Left: l, Right: r}
-				tree = append(tree, root)
+				trees = append(trees, root)
 			}
 		}
 	}
-	return tree
+	return trees
 }

@@ -5,7 +5,9 @@ import "fmt"
 func trailingZeroes(n int) int {
 	res := 0
 
-	// 150: 37(30 + 6 + 1)，分别为含 1、2、3 个因子 5 的个数
+	// 30: 7(6+1)
+	// 含1个因子5: 6(5 10 15 20 25 30)
+	// 含2个因子5: 1(25)
 	for n >= 5 {
 		n /= 5
 		res += n
@@ -15,5 +17,5 @@ func trailingZeroes(n int) int {
 }
 
 func main() {
-	fmt.Println(trailingZeroes(10))
+	fmt.Println(trailingZeroes(30))
 }

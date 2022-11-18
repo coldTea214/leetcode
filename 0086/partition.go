@@ -4,19 +4,19 @@ func partition(head *ListNode, x int) *ListNode {
 	}
 
 	lowHead, highHead := &ListNode{}, &ListNode{}
-	lowPtr, highPtr := lowHead, highHead
-	curPtr := head
-	for curPtr != nil {
-		if curPtr.Val < x {
-			lowPtr.Next = curPtr
-			lowPtr = lowPtr.Next
+	low, high := lowHead, highHead
+	cur := head
+	for cur != nil {
+		if cur.Val < x {
+			low.Next = cur
+			low = low.Next
 		} else {
-			highPtr.Next = curPtr
-			highPtr = highPtr.Next
+			high.Next = cur
+			high = high.Next
 		}
-		curPtr = curPtr.Next
+		cur = cur.Next
 	}
-	lowPtr.Next = highHead.Next
-	highPtr.Next = nil
+	low.Next = highHead.Next
+	high.Next = nil
 	return lowHead.Next
 }

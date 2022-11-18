@@ -1,4 +1,4 @@
-// 递归版本
+// 递归
 func inorderTraversal(root *TreeNode) []int {
 	var res []int
 	inorderTraversalHelper(root, &res)
@@ -13,7 +13,7 @@ func inorderTraversalHelper(root *TreeNode, res *[]int) {
 	}
 }
 
-// 迭代版本
+// 迭代
 type Stack struct {
 	nodes []*TreeNode
 }

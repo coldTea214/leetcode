@@ -2,13 +2,15 @@ package main
 
 import "fmt"
 
+// dfs
+// 后置题 0090
 func subsets(nums []int) [][]int {
 	var result [][]int
-	doFindSubsets(nums, []int{}, &result)
+	subsetsHelper(nums, []int{}, &result)
 	return result
 }
 
-func doFindSubsets(nums []int, subset []int, result *[][]int) {
+func subsetsHelper(nums []int, subset []int, result *[][]int) {
 	if len(nums) == 0 {
 		deepcopy := make([]int, len(subset))
 		copy(deepcopy, subset)
@@ -16,8 +18,8 @@ func doFindSubsets(nums []int, subset []int, result *[][]int) {
 		return
 	}
 
-	doFindSubsets(nums[1:], subset, result)
-	doFindSubsets(nums[1:], append(subset, nums[0]), result)
+	subsetsHelper(nums[1:], subset, result)
+	subsetsHelper(nums[1:], append(subset, nums[0]), result)
 }
 
 func main() {

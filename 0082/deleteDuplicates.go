@@ -1,4 +1,3 @@
-// 前置题 0083
 // 迭代
 func deleteDuplicates(head *ListNode) *ListNode {
 	if head == nil {

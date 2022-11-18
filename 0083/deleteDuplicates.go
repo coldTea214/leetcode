@@ -7,7 +7,7 @@ func deleteDuplicates(head *ListNode) *ListNode {
 	for quick != nil {
 		if quick.Val != slow.Val {
 			slow.Next = quick
-			slow = slow.Next
+			slow = quick
 		}
 		quick = quick.Next
 	}

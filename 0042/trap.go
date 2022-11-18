@@ -1,12 +1,8 @@
-// i 点的存水量为 min(max(height[:i+1]...), max(height[i:]...)) - height[i]
-
 func trap(height []int) int {
 	if len(height) <= 2 {
 		return 0
 	}
 
-	// maxFromLeft[i] = max{height[:i]}
-	// maxFromRight[i] = max{height[i:]}
 	maxFromLeft := make([]int, len(height))
 	maxFromLeft[0] = height[0]
 	for i := 1; i < len(height); i++ {

@@ -1,6 +1,6 @@
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	preHead := &ListNode{}
-	curPtr := preHead
+	cur := preHead
 
 	var carry int
 	for l1 != nil || l2 != nil {
@@ -17,13 +17,13 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		sum := (digit1 + digit2 + carry) % 10
 		carry = (digit1 + digit2 + carry) / 10
 
-		curPtr.Next = &ListNode{
+		cur.Next = &ListNode{
 			Val: sum,
 		}
-		curPtr = curPtr.Next
+		cur = cur.Next
 	}
 	if carry != 0 {
-		curPtr.Next = &ListNode{
+		cur.Next = &ListNode{
 			Val: carry,
 		}
 	}

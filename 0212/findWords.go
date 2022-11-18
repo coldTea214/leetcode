@@ -1,3 +1,4 @@
+// trie
 func findWords(board [][]byte, words []string) []string {
 	m := len(board)
 	if m == 0 {

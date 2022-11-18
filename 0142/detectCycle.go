@@ -20,9 +20,10 @@ func detectCycle(head *ListNode) *ListNode {
 		return nil
 	}
 
-	for slow != head {
+	cur := head
+	for slow != cur {
 		slow = slow.Next
-		head = head.Next
+		cur = cur.Next
 	}
 	return slow
 }

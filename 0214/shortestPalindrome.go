@@ -1,5 +1,5 @@
 // 更常见的应该还是 manacher 算法
-
+// 暴力算法: 依次把 s s[:n-1] s[n-2] 翻折到前面，判断是否回文，时间复杂度O(n^2)
 func shortestPalindrome(s string) string {
 	if len(s) <= 1 {
 		return s

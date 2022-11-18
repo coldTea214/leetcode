@@ -10,10 +10,10 @@ func reverseHelper(head *ListNode, k int) *ListNode {
 	if needReverse {
 		tailNext := tail.Next
 		// k = 3
-		// 3 -> 2 -> 1 -> 4 -> 5 -> 6 -> 7
+		// 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 		//                h         t    tn
 		head, tail = reverseList(head, tail)
-		// 3 -> 2 -> 1 -> 6 -> 5 -> 4    7
+		// 1 -> 2 -> 3 -> 6 -> 5 -> 4    7
 		//                h         t    tn
 		tail.Next = reverseHelper(tailNext, k)
 	}

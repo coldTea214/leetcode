@@ -1,3 +1,4 @@
+// trie
 type Trie struct {
 	isWord bool
 	// 这里是通用前缀树写法，本题限定了输入，用 26 位数组更好

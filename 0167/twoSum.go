@@ -1,13 +1,13 @@
 func twoSum(numbers []int, target int) []int {
-	low, high := 0, len(numbers)-1
-	for low < high {
-		sum := numbers[low] + numbers[high]
+	left, right := 0, len(numbers)-1
+	for left < right {
+		sum := numbers[left] + numbers[right]
 		if sum == target {
-			return []int{low + 1, high + 1}
+			return []int{left + 1, right + 1}
 		} else if sum < target {
-			low++
+			left++
 		} else {
-			high--
+			right--
 		}
 	}
 	return nil

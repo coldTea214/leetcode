@@ -27,7 +27,7 @@ func generatePalindromes(s string) []string {
 		}
 	}
 	var solutions [][]byte
-	doGenerateWords(halfLetters, make(map[int]bool), []byte{}, &solutions)
+	generatePalindromesHelper(halfLetters, make(map[int]bool), []byte{}, &solutions)
 	ans := make([]string, len(solutions))
 	for i, word := range solutions {
 		ans[i] = string(word) + oddLetter
@@ -36,7 +36,7 @@ func generatePalindromes(s string) []string {
 	return ans
 }
 
-func doGenerateWords(halfLetters []byte, letterInWord map[int]bool, solution []byte, solutions *[][]byte) {
+func generatePalindromesHelper(halfLetters []byte, letterInWord map[int]bool, solution []byte, solutions *[][]byte) {
 	if len(solution) == len(halfLetters) {
 		deepcopy := make([]byte, len(halfLetters))
 		copy(deepcopy, solution)
@@ -49,7 +49,7 @@ func doGenerateWords(halfLetters []byte, letterInWord map[int]bool, solution []b
 		if !letterInWord[i] && !letterInWordThisLevel[halfLetters[i]] {
 			letterInWord[i] = true
 			letterInWordThisLevel[halfLetters[i]] = true
-			doGenerateWords(halfLetters, letterInWord, append(solution, halfLetters[i]), solutions)
+			generatePalindromesHelper(halfLetters, letterInWord, append(solution, halfLetters[i]), solutions)
 			letterInWord[i] = false
 		}
 	}

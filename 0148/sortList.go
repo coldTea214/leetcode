@@ -1,3 +1,19 @@
+package main
+
+import "fmt"
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+func printList(head *ListNode) {
+	for cur := head; cur != nil; cur = cur.Next {
+		fmt.Printf("%v ", cur.Val)
+	}
+	fmt.Println()
+}
+
 // 类似题 0023
 func sortList(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
@@ -8,23 +24,20 @@ func sortList(head *ListNode) *ListNode {
 	return merge2Lists(sortList(left), sortList(right))
 }
 
-func split(head *ListNode) (left, right *ListNode) {
+func split(head *ListNode) (*ListNode, *ListNode) {
 	slow, fast := head, head
-	var preSlow *ListNode
-
-	for fast != nil && fast.Next != nil {
-		preSlow, slow = slow, slow.Next
-		fast = fast.Next.Next
+	for fast.Next != nil && fast.Next.Next != nil {
+		slow, fast = slow.Next, fast.Next.Next
 	}
 
-	preSlow.Next = nil
-	left, right = head, slow
-	return
+	head2 := slow.Next
+	slow.Next = nil
+	return head, head2
 }
 
 func merge2Lists(left, right *ListNode) *ListNode {
-	cur := &ListNode{}
-	preHead := cur
+	preHead := &ListNode{}
+	cur := preHead
 	for left != nil && right != nil {
 		if left.Val < right.Val {
 			cur.Next, left = left, left.Next
@@ -41,4 +54,25 @@ func merge2Lists(left, right *ListNode) *ListNode {
 	}
 
 	return preHead.Next
+}
+
+func main() {
+	head := &ListNode{
+		5,
+		&ListNode{
+			7,
+			&ListNode{
+				3,
+				&ListNode{
+					4,
+					&ListNode{
+						8,
+						nil,
+					},
+				},
+			},
+		},
+	}
+	newHead := sortList(head)
+	printList(newHead)
 }

@@ -1,31 +1,23 @@
-import "math"
+package main
 
+import "fmt"
+
+// 后置题 0188
 func maxProfit(prices []int) int {
-	minPrice := math.MaxInt32
-	maxFromBeg := make([]int, len(prices)+1)
-	for i := 1; i <= len(prices); i++ {
-		if prices[i-1] < minPrice {
-			minPrice = prices[i-1]
-		}
-		maxFromBeg[i] = max(prices[i-1]-minPrice, maxFromBeg[i-1])
+	buy1, sell1 := -prices[0], 0
+	buy2, sell2 := -prices[0], 0
+	//        3  2  6  5  0 3
+	// buy1  -3 -2 -2 -2  0 0
+	// sell1  0  0  4  4  4 4
+	// buy2  -3 -2 -2 -1  4 4
+	// sell2  0  0  4  4  4 7
+	for i := 1; i < len(prices); i++ {
+		buy1 = max(buy1, -prices[i])
+		sell1 = max(sell1, buy1+prices[i])
+		buy2 = max(buy2, sell1-prices[i])
+		sell2 = max(sell2, buy2+prices[i])
 	}
-
-	maxPrice := 0
-	maxFromEnd := make([]int, len(prices)+1)
-	for i := len(prices) - 1; i >= 0; i-- {
-		if prices[i] > maxPrice {
-			maxPrice = prices[i]
-		}
-		maxFromEnd[i] = max(maxFromEnd[i+1], maxPrice-prices[i])
-	}
-
-	res := 0
-	for i := 0; i < len(prices); i++ {
-		if maxFromBeg[i]+maxFromEnd[i] > res {
-			res = maxFromBeg[i] + maxFromEnd[i]
-		}
-	}
-	return res
+	return sell2
 }
 
 func max(a, b int) int {
@@ -33,4 +25,9 @@ func max(a, b int) int {
 		return a
 	}
 	return b
+}
+
+func main() {
+	// 7
+	fmt.Println(maxProfit([]int{3, 2, 6, 5, 0, 3}))
 }

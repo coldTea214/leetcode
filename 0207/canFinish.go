@@ -1,3 +1,4 @@
+// topo sort
 func canFinish(numCourses int, prerequisites [][]int) bool {
 	inDegree := make([]int, numCourses)
 	afterCourses := make([][]int, numCourses)

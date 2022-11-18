@@ -2,14 +2,15 @@ package main
 
 import "fmt"
 
+// dfs
 func permute(nums []int) [][]int {
 	numInPermutation := make(map[int]bool)
 	var permutations [][]int
-	doPermute(nums, numInPermutation, []int{}, &permutations)
+	permuteHelper(nums, numInPermutation, []int{}, &permutations)
 	return permutations
 }
 
-func doPermute(nums []int, numInPermutation map[int]bool, permutation []int, permutations *[][]int) {
+func permuteHelper(nums []int, numInPermutation map[int]bool, permutation []int, permutations *[][]int) {
 	if len(permutation) == len(nums) {
 		deepcopy := make([]int, len(nums))
 		copy(deepcopy, permutation)
@@ -20,7 +21,7 @@ func doPermute(nums []int, numInPermutation map[int]bool, permutation []int, per
 	for i := 0; i < len(nums); i++ {
 		if !numInPermutation[nums[i]] {
 			numInPermutation[nums[i]] = true
-			doPermute(nums, numInPermutation, append(permutation, nums[i]), permutations)
+			permuteHelper(nums, numInPermutation, append(permutation, nums[i]), permutations)
 			numInPermutation[nums[i]] = false
 		}
 	}

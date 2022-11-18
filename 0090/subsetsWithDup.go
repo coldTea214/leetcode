@@ -6,14 +6,15 @@ import (
 )
 
 // 前置题 0078
+// 变化点是 nums可以重复
 func subsetsWithDup(nums []int) [][]int {
 	var result [][]int
 	sort.Ints(nums)
-	doFindSubsets(nums, []int{}, &result)
+	subsetsWithDupHelper(nums, []int{}, &result)
 	return result
 }
 
-func doFindSubsets(nums []int, subset []int, result *[][]int) {
+func subsetsWithDupHelper(nums []int, subset []int, result *[][]int) {
 	if len(nums) == 0 {
 		deepcopy := make([]int, len(subset))
 		copy(deepcopy, subset)
@@ -21,11 +22,11 @@ func doFindSubsets(nums []int, subset []int, result *[][]int) {
 		return
 	}
 
-	doFindSubsets(nums[1:], append(subset, nums[0]), result)
+	subsetsWithDupHelper(nums[1:], append(subset, nums[0]), result)
 	var i int
 	for i = 1; i < len(nums) && nums[i] == nums[0]; i++ {
 	}
-	doFindSubsets(nums[i:], subset, result)
+	subsetsWithDupHelper(nums[i:], subset, result)
 }
 
 func main() {

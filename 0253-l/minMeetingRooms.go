@@ -5,6 +5,9 @@ import (
 	"sort"
 )
 
+// 上下车问题, 等价于车上最多有多少人
+// 0 -> 5 -> 10 -> 15 -> 20 -> 30
+//   +1   +1    -1    +1    -1    -1
 func minMeetingRooms(intervals [][]int) int {
 	n := len(intervals)
 	begin, end := make([]int, n), make([]int, n)

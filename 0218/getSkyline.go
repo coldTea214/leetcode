@@ -6,6 +6,7 @@ import (
 	"sort"
 )
 
+// 扫描线问题
 type pair struct {
 	right, height int
 }

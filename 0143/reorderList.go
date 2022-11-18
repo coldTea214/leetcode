@@ -1,45 +1,106 @@
+package main
+
+import "fmt"
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+func printList(head *ListNode) {
+	for cur := head; cur != nil; cur = cur.Next {
+		fmt.Printf("%v ", cur.Val)
+	}
+	fmt.Println()
+}
+
 func reorderList(head *ListNode) {
 	if head == nil {
 		return
 	}
 
-	// 获取 list 的长度 size
-	cur := head
-	size := 0
-	for cur != nil {
-		cur = cur.Next
-		size++
+	slow, quick := head, head
+	// tips: 
+	for quick.Next != nil && quick.Next.Next != nil {
+		slow = slow.Next
+		quick = quick.Next.Next
+	}
+	if slow == nil || slow == quick {
+		return
 	}
 
-	// size 为奇数， cur 指向 list 的中间节点
-	// size 为偶数， cur 指向 list 前一半的最后一个节点
-	cur = head
-	for i := 0; i < (size-1)/2; i++ {
-		cur = cur.Next
-	}
-	// head -> 1 -> 2 -> 3 -> 4 -> 5 -> 6
-	//                   ^
-	//                   |
-	//                  cur
+	head2 := slow.Next
+	slow.Next = nil
+	//           s
+	// 1 -> 2 -> 3  4 -> 5
+	// h         s 
+	// 1 -> 2 -> 3  4 -> 5 -> 6
+	// tips: 如果上述判断条件是 for quick != nil && quick.Next != nil, 则 slow 位置略有不同
+	//           s
+	// 1 -> 2 -> 3  4 -> 5
+	//                s
+	// 1 -> 2 -> 3 -> 4  5 -> 6
 
-	next := cur.Next
-	for next != nil {
-		temp := next.Next
-		next.Next = cur
-		cur = next
-		next = temp
+	var prev *ListNode
+	for head2 != nil {
+		next := head2.Next
+		head2.Next = prev
+		prev = head2
+		head2 = next
 	}
-	end := cur
-	// head -> 1 -> 2 -> 3 <-> 4 <- 5 <- 6 <- end
+	head2 = prev
+	// h                      h2
+	// 1 -> 2 -> 3  4 <- 5 <- 6
 
-	for head != end {
+	for head != nil && head2 != nil {
 		hNext := head.Next
-		eNext := end.Next
-		head.Next = end
-		end.Next = hNext
+		eNext := head2.Next
+		head.Next = head2
+		head2.Next = hNext
 		head = hNext
-		end = eNext
+		head2 = eNext
 	}
+}
 
-	end.Next = nil
+func main() {
+	head := &ListNode{
+		1,
+		&ListNode{
+			2,
+			&ListNode{
+				3,
+				&ListNode{
+					4,
+					&ListNode{
+						5,
+						nil,
+					},
+				},
+			},
+		},
+	}
+	reorderList(head)
+	printList(head)
+
+	head = &ListNode{
+		1,
+		&ListNode{
+			2,
+			&ListNode{
+				3,
+				&ListNode{
+					4,
+					&ListNode{
+						5,
+						&ListNode{
+							6,
+							nil,
+						},
+					},
+				},
+			},
+		},
+	}
+	reorderList(head)
+	printList(head)
 }

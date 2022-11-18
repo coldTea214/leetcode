@@ -1,10 +1,10 @@
 func sumNumbers(root *TreeNode) int {
 	res := 0
-	calculateSum(root, 0, &res)
+	sumNumbersHelper(root, 0, &res)
 	return res
 }
 
-func calculateSum(root *TreeNode, num int, res *int) {
+func sumNumbersHelper(root *TreeNode, num int, res *int) {
 	if root == nil {
 		return
 	}
@@ -15,6 +15,6 @@ func calculateSum(root *TreeNode, num int, res *int) {
 		return
 	}
 
-	calculateSum(root.Left, num, res)
-	calculateSum(root.Right, num, res)
+	sumNumbersHelper(root.Left, num, res)
+	sumNumbersHelper(root.Right, num, res)
 }

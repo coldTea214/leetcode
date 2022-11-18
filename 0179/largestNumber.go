@@ -1,4 +1,8 @@
+package main
+
 import (
+	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -9,7 +13,11 @@ func largestNumber(nums []int) string {
 	}
 	numStrs := toStringArray(nums)
 
-	quickSort(numStrs, 0, len(numStrs)-1)
+	sort.Slice(numStrs, func(i, j int) bool {
+		return numStrs[i]+numStrs[j] > numStrs[j]+numStrs[i]
+	})
+	// quickSort(numStrs, 0, len(numStrs)-1)
+
 	if numStrs[0] == "0" {
 		return "0"
 	}
@@ -44,4 +52,8 @@ func partition(strs []string, low, high int) int {
 	}
 	strs[i+1], strs[high] = strs[high], strs[i+1]
 	return i + 1
+}
+
+func main() {
+	fmt.Println(largestNumber([]int{3, 30, 34, 5, 9}))
 }

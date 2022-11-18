@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// 后置题 0081
 func search(nums []int, target int) int {
 	low, high := 0, len(nums)-1
 	for low <= high {

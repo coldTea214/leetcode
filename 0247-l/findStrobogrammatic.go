@@ -6,39 +6,36 @@ import (
 )
 
 var pairs = [][2]byte{{'0', '0'}, {'1', '1'}, {'6', '9'}, {'8', '8'}, {'9', '6'}}
-var base1 = []string{"0", "1", "8"}
-var base2 = []string{"00", "11", "69", "88", "96"}
+var base = []string{"0", "1", "8"}
 
 func findStrobogrammatic(n int) []string {
-	if n == 2 {
-		return base2[1:]
+	var strobogrammatics []string
+	if n%2 == 1 {
+		for _, s := range base {
+			findStrobogrammaticHelper(n-1, s, &strobogrammatics)
+		}
+	} else {
+		findStrobogrammaticHelper(n, "", &strobogrammatics)
 	}
-	return findStrobogrammaticHelper(n, n)
+	return strobogrammatics
 }
 
-func findStrobogrammaticHelper(n, k int) []string {
-	if k == 1 {
-		return base1
-	}
-	if k == 2 {
-		return base2
+func findStrobogrammaticHelper(i int, strobogrammatic string, strobogrammatics *[]string) {
+	if i == 0 {
+		*strobogrammatics = append(*strobogrammatics, strobogrammatic)
+		return
 	}
 
-	innerNums := findStrobogrammaticHelper(n, k-2)
-	nums := []string{}
-	for _, innerNum := range innerNums {
-		for _, pair := range pairs {
-			if k == n && pair[0] == '0' {
-				continue
-			}
-			num := &strings.Builder{}
-			num.WriteByte(pair[0])
-			num.WriteString(innerNum)
-			num.WriteByte(pair[1])
-			nums = append(nums, num.String())
+	for _, pair := range pairs {
+		if i == 2 && pair[0] == '0' {
+			continue
 		}
+		num := &strings.Builder{}
+		num.WriteByte(pair[0])
+		num.WriteString(strobogrammatic)
+		num.WriteByte(pair[1])
+		findStrobogrammaticHelper(i-2, num.String(), strobogrammatics)
 	}
-	return nums
 }
 
 func main() {

@@ -3,16 +3,16 @@ func isIsomorphic(s string, t string) bool {
 		return false
 	}
 
-	sLastAppearInLoc := make([]int, 256)
-	tLastAppearInLoc := make([]int, 256)
+	sLastAppearLoc := make([]int, 256)
+	tLastAppearLoc := make([]int, 256)
 
 	for i := 0; i < len(s); i++ {
-		if sLastAppearInLoc[int(s[i])] != tLastAppearInLoc[int(t[i])] {
+		if sLastAppearLoc[int(s[i])] != tLastAppearLoc[int(t[i])] {
 			return false
 		}
 
-		sLastAppearInLoc[int(s[i])] = i + 1
-		tLastAppearInLoc[int(t[i])] = i + 1
+		sLastAppearLoc[int(s[i])] = i + 1
+		tLastAppearLoc[int(t[i])] = i + 1
 	}
 
 	return true

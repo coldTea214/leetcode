@@ -5,14 +5,15 @@ import (
 	"sort"
 )
 
+// dfs
 func combinationSum(candidates []int, target int) [][]int {
 	sort.Ints(candidates)
 	solutions := [][]int{}
-	doFindCombination(candidates, target, []int{}, &solutions)
+	combinationSumHelper(candidates, target, []int{}, &solutions)
 	return solutions
 }
 
-func doFindCombination(candidates []int, target int, solution []int, solutions *[][]int) {
+func combinationSumHelper(candidates []int, target int, solution []int, solutions *[][]int) {
 	if target == 0 {
 		deepcopy := make([]int, len(solution))
 		copy(deepcopy, solution)
@@ -24,8 +25,8 @@ func doFindCombination(candidates []int, target int, solution []int, solutions *
 		return
 	}
 
-	doFindCombination(candidates, target-candidates[0], append(solution, candidates[0]), solutions)
-	doFindCombination(candidates[1:], target, solution, solutions)
+	combinationSumHelper(candidates, target-candidates[0], append(solution, candidates[0]), solutions)
+	combinationSumHelper(candidates[1:], target, solution, solutions)
 }
 
 func main() {

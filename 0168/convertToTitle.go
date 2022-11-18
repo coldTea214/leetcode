@@ -1,3 +1,7 @@
+package main
+
+import "fmt"
+
 func convertToTitle(n int) string {
 	res := ""
 
@@ -8,4 +12,10 @@ func convertToTitle(n int) string {
 	}
 
 	return res
+}
+
+func main() {
+	fmt.Println(convertToTitle(1))
+	fmt.Println(convertToTitle(26))
+	fmt.Println(convertToTitle(27))
 }

@@ -11,9 +11,10 @@ func compareVersion(version1 string, version2 string) int {
 	v2s := conv(version2)
 
 	if len(v1s) != len(v2s) {
+		// v1s [1 0 0] v2s [1 0 1]
 		v1s, v2s = toSameLen(v1s, v2s)
 	}
-
+	
 	for i := 0; i < len(v1s); i++ {
 		if v1s[i] < v2s[i] {
 			return -1
@@ -27,8 +28,8 @@ func compareVersion(version1 string, version2 string) int {
 func conv(version string) []int {
 	vs := strings.Split(version, ".")
 	res := make([]int, len(vs))
-
 	for i, v := range vs {
+		// Atoi 能处理 "01"
 		res[i], _ = strconv.Atoi(v)
 	}
 	return res

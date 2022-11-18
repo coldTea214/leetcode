@@ -2,13 +2,14 @@ package main
 
 import "fmt"
 
+// dfs
 func restoreIpAddresses(s string) []string {
 	solutions := []string{}
-	doGenerateIP(s, []string{}, &solutions)
+	restoreIpAddressesHelper(s, []string{}, &solutions)
 	return solutions
 }
 
-func doGenerateIP(s string, solution []string, solutions *[]string) {
+func restoreIpAddressesHelper(s string, solution []string, solutions *[]string) {
 	if len(solution) == 3 {
 		if isValid(s) {
 			solution = append(solution, s)
@@ -24,7 +25,7 @@ func doGenerateIP(s string, solution []string, solutions *[]string) {
 
 	for end := 1; end <= 3 && end < len(s); end++ {
 		if isValid(s[:end]) {
-			doGenerateIP(s[end:], append(solution, s[:end]), solutions)
+			restoreIpAddressesHelper(s[end:], append(solution, s[:end]), solutions)
 		}
 	}
 }

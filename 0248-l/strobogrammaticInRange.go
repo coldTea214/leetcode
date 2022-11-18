@@ -14,6 +14,7 @@ func strobogrammaticInRange(low string, high string) int {
 }
 
 func strobogrammaticInRangeHelper(low, high, num string, ans *int) {
+	// 直接以字符串比较替代数字比较是不行的: "50" > "100"
 	if len(low) <= len(num) && len(num) <= len(high) {
 		if len(num) == len(low) && num < low ||
 			len(num) == len(high) && num > high {
@@ -23,10 +24,11 @@ func strobogrammaticInRangeHelper(low, high, num string, ans *int) {
 			*ans++
 		}
 	}
-	if len(num)+2 <= len(high) {
-		for _, pair := range pairs {
-			strobogrammaticInRangeHelper(low, high, pair[0]+num+pair[1], ans)
-		}
+	if len(num)+2 > len(high) {
+		return
+	}
+	for _, pair := range pairs {
+		strobogrammaticInRangeHelper(low, high, pair[0]+num+pair[1], ans)
 	}
 }
 

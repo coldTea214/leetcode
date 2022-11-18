@@ -20,9 +20,9 @@ func calculate(s string) int {
 			res, sign = 0, 1
 		case ')':
 			sign = stack[len(stack)-1]
-			tmp := stack[len(stack)-2]
+			outerRes := stack[len(stack)-2]
 			stack = stack[:len(stack)-2]
-			res = sign*res + tmp
+			res = outerRes + sign*res
 		}
 	}
 

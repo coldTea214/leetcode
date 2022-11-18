@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// dfs
 func solveNQueens(n int) [][]string {
 	// appearInLeftSlash，皇后位于左斜线（例：[0,0]->[7,7])
 	// 以 5 皇后为例
@@ -26,11 +27,11 @@ func solveNQueens(n int) [][]string {
 	appearInLeftSlash, appearInRightSlash := make([]bool, n*2-1), make([]bool, n*2-1)
 
 	var solutions [][]string
-	doSolve(appearInCol, appearInLeftSlash, appearInRightSlash, []string{}, &solutions)
+	solveNQueensHelper(appearInCol, appearInLeftSlash, appearInRightSlash, []string{}, &solutions)
 	return solutions
 }
 
-func doSolve(appearInCol, appearInLeftSlash, appearInRightSlash []bool, solution []string, solutions *[][]string) {
+func solveNQueensHelper(appearInCol, appearInLeftSlash, appearInRightSlash []bool, solution []string, solutions *[][]string) {
 	i, n := len(solution), len(appearInCol)
 	if i == n {
 		deepcopy := make([]string, n)
@@ -48,7 +49,7 @@ func doSolve(appearInCol, appearInLeftSlash, appearInRightSlash []bool, solution
 			appearInCol[j], appearInLeftSlash[n-i+j-1], appearInRightSlash[i+j] = true, true, true
 			rowInSolution[j] = 'Q'
 
-			doSolve(appearInCol, appearInLeftSlash, appearInRightSlash, append(solution, string(rowInSolution)), solutions)
+			solveNQueensHelper(appearInCol, appearInLeftSlash, appearInRightSlash, append(solution, string(rowInSolution)), solutions)
 
 			rowInSolution[j] = '.'
 			appearInCol[j], appearInLeftSlash[n-i+j-1], appearInRightSlash[i+j] = false, false, false

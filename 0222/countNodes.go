@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
 type TreeNode struct {
@@ -11,40 +10,28 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-// 完全二叉树
 func countNodes(root *TreeNode) int {
 	if root == nil {
 		return 0
 	}
+
+	leftLevel := treeLevel(root.Left)
+	rightLevel := treeLevel(root.Right)
+	if leftLevel == rightLevel {
+		// 左子树是完全二叉树
+		return countNodes(root.Right) + 1<<leftLevel
+	} else {
+		// 右子树是完全二叉树
+		return countNodes(root.Left) + 1<<rightLevel
+	}
+}
+
+func treeLevel(root *TreeNode) int {
 	level := 0
-	for node := root; node.Left != nil; node = node.Left {
+	for node := root; node != nil; node = node.Left {
 		level++
 	}
-
-	low, high := 1, 1<<(level+1)
-	for low < high {
-		mid := (low + high) >> 1
-		if mid <= 1<<level {
-			low = mid + 1
-		} else {
-			bits := 1 << (level - 1)
-			node := root
-			for node != nil && bits > 0 {
-				if bits&mid == 0 {
-					node = node.Left
-				} else {
-					node = node.Right
-				}
-				bits >>= 1
-			}
-			if node == nil {
-				high = mid
-			} else {
-				low = mid + 1
-			}
-		}
-	}
-	return low-1
+	return level
 }
 
 // 通用
@@ -81,18 +68,18 @@ func main() {
 		},
 	}
 	/*
-	root := &TreeNode{
-		Val: 1,
-		Left: &TreeNode{
-			Val: 2,
+		root := &TreeNode{
+			Val: 1,
 			Left: &TreeNode{
-				Val: 4,
+				Val: 2,
+				Left: &TreeNode{
+					Val: 4,
+				},
 			},
-		},
-		Right: &TreeNode{
-			Val: 3,
-		},
-	}
+			Right: &TreeNode{
+				Val: 3,
+			},
+		}
 	*/
 	fmt.Println(countNodes(root))
 }

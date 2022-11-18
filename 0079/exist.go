@@ -1,53 +1,58 @@
+package main
+
+import "fmt"
+
+// dfs
 func exist(board [][]byte, word string) bool {
-	row := len(board)
-	if row == 0 {
-		return false
-	}
-	col := len(board[0])
-	if col == 0 {
-		return false
-	}
-	if len(word) == 0 {
+	if len(board) == 0 || len(board[0]) == 0 || len(word) == 0 {
 		return false
 	}
 
-	visited := make([][]bool, row)
+	visited := make([][]bool, len(board))
 	for i := range visited {
-		visited[i] = make([]bool, col)
+		visited[i] = make([]bool, len(board[0]))
 	}
 
-	for i := 0; i < row; i++ {
-		for j := 0; j < col; j++ {
-			if doExist(i, j, row, col, 0, word, board, visited) {
+	for i := 0; i < len(board); i++ {
+		for j := 0; j < len(board[0]); j++ {
+			if existHelper(i, j, word, board, visited) {
 				return true
 			}
 		}
 	}
+	return false
+}
+
+func existHelper(i, j int, word string, board [][]byte, visited [][]bool) bool {
+	if word == "" {
+		return true
+	}
+
+	if i < 0 || i >= len(board) || j < 0 || j >= len(board[0]) ||
+		visited[i][j] ||
+		board[i][j] != word[0] {
+		return false
+	}
+
+	visited[i][j] = true
+
+	if existHelper(i-1, j, word[1:], board, visited) ||
+		existHelper(i+1, j, word[1:], board, visited) ||
+		existHelper(i, j-1, word[1:], board, visited) ||
+		existHelper(i, j+1, word[1:], board, visited) {
+		return true
+	}
+
+	visited[i][j] = false
 
 	return false
 }
 
-func doExist(curRow, curCol, row, col, count int, word string, board [][]byte, visited [][]bool) bool {
-	if count == len(word) {
-		return true
+func main() {
+	board := [][]byte{
+		{'A', 'B', 'C', 'E'},
+		{'S', 'F', 'C', 'S'},
+		{'A', 'D', 'E', 'E'},
 	}
-
-	if curRow < 0 || curRow >= row || curCol < 0 || curCol >= col ||
-		visited[curRow][curCol] ||
-		board[curRow][curCol] != word[count] {
-		return false
-	}
-
-	visited[curRow][curCol] = true
-
-	if doExist(curRow-1, curCol, row, col, count+1, word, board, visited) ||
-		doExist(curRow+1, curCol, row, col, count+1, word, board, visited) ||
-		doExist(curRow, curCol-1, row, col, count+1, word, board, visited) ||
-		doExist(curRow, curCol+1, row, col, count+1, word, board, visited) {
-		return true
-	}
-
-	visited[curRow][curCol] = false
-
-	return false
+	fmt.Println(exist(board, "ABCCED"))
 }

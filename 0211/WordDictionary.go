@@ -1,3 +1,4 @@
+// trie
 type WordDictionary struct {
 	children map[rune]*WordDictionary
 	isWord   bool

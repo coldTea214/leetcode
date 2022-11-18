@@ -6,6 +6,7 @@ func isOneEditDistance(s, t string) bool {
 	if m-n > 1 {
 		return false
 	}
+
 	foundDifference := false
 	for i, ch := range t {
 		if s[i] != byte(ch) {

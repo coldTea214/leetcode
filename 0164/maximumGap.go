@@ -1,8 +1,9 @@
 import "math"
 
 // 桶排序
-// 构造的桶大小为 (B - A) / (N - 1)
-// 则最大的 gap 必然是 当前桶里的最大值和下一个非空桶的最小值
+// 构造的桶大小为 (Max - Min) / (N - 1), 设 Max=0,Min=10,N=6, 则桶为 [0,2) [2,4) [4,6) [6,8) [8,10) [10,12)
+// 则maxGap必然是 当前桶里的最大值和下一个非空桶的最小值
+// 反证: 如上例, 假如maxGap位于一个桶内, 则maxGap<2(桶左闭右开), 6个数之间的gap就算都为maxGap, 也是maxGap*5<Max-Min
 func maximumGap(nums []int) int {
 	if len(nums) < 2 {
 		return 0

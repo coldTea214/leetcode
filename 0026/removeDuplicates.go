@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// 后置题 0080
 func removeDuplicates(nums []int) int {
 	slow := 1
 	for quick := slow; quick < len(nums); quick++ {

@@ -15,6 +15,5 @@ func plusOne(digits []int) []int {
 	if digits[0] == 10 {
 		digits = append([]int{1, 0}, digits[1:]...)
 	}
-
 	return digits
 }

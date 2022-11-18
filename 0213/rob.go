@@ -9,10 +9,10 @@ func rob(nums []int) int {
 		return max(nums[0], nums[1])
 	}
 
-	return max(doRob(nums[:len(nums)-1]), doRob(nums[1:]))
+	return max(robHelper(nums[:len(nums)-1]), robHelper(nums[1:]))
 }
 
-func doRob(nums []int) int {
+func robHelper(nums []int) int {
 	dp := make([]int, len(nums))
 	dp[0], dp[1] = nums[0], max(nums[1], nums[0])
 	for i := 2; i < len(nums); i++ {

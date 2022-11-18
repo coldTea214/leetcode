@@ -29,11 +29,11 @@ func wordBreak(s string, wordDict []string) []string {
 	}
 
 	var res []string
-	doWordBreak(s, sizes, wordExist, "", &res)
+	wordBreakHelper(s, sizes, wordExist, "", &res)
 	return res
 }
 
-func doWordBreak(s string, sizes map[int]bool, wordExist map[string]bool, str string, res *[]string) {
+func wordBreakHelper(s string, sizes map[int]bool, wordExist map[string]bool, str string, res *[]string) {
 	if len(s) == 0 {
 		*res = append(*res, str[1:])
 		return
@@ -41,7 +41,7 @@ func doWordBreak(s string, sizes map[int]bool, wordExist map[string]bool, str st
 
 	for size := range sizes {
 		if size <= len(s) && wordExist[s[:size]] {
-			doWordBreak(s[size:], sizes, wordExist, str+" "+s[:size], res)
+			wordBreakHelper(s[size:], sizes, wordExist, str+" "+s[:size], res)
 		}
 	}
 }

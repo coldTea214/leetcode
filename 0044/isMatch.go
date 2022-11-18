@@ -1,4 +1,6 @@
-func isMatch(s string, p string) bool {
+// 前置题 0010
+// 变化点是 *语义不再依赖*前面的字母
+func isMatch(s, p string) bool {
 	sLen, pLen := len(s), len(p)
 
 	// dp[i][j] == true 表示 s[:i] 和 p[:j] 匹配

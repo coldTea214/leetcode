@@ -22,6 +22,7 @@ func strStr2(haystack string, needle string) int {
 }
 
 // 解法3: kmp
+// 时间复杂度: O(m+n)
 // https://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html
 func strStr(haystack, needle string) int {
 	hLen, nLen := len(haystack), len(needle)

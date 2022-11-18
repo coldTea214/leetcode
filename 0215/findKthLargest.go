@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// quick sort
 func findKthLargest(nums []int, k int) int {
 	if len(nums) == 0 {
 		return 0

@@ -1,5 +1,5 @@
 // 前置题 0094
-// 递归版本
+// 递归
 func preorderTraversal(root *TreeNode) []int {
 	var res []int
 	preorderTraversalHelper(root, &res)
@@ -14,7 +14,7 @@ func preorderTraversalHelper(root *TreeNode, res *[]int) {
 	}
 }
 
-// 迭代版本
+// 迭代
 type Stack struct {
 	nodes []*TreeNode
 }

@@ -1,10 +1,10 @@
 func pathSum(root *TreeNode, sum int) [][]int {
-	var res [][]int
-	doPathSum(root, sum, []int{}, &res)
-	return res
+	var paths [][]int
+	pathSumHelper(root, sum, []int{}, &paths)
+	return paths
 }
 
-func doPathSum(root *TreeNode, sum int, path []int, res *[][]int) {
+func pathSumHelper(root *TreeNode, sum int, path []int, paths *[][]int) {
 	if root == nil {
 		return
 	}
@@ -15,10 +15,10 @@ func doPathSum(root *TreeNode, sum int, path []int, res *[][]int) {
 			path = append(path, root.Val)
 			deepcopy := make([]int, len(path))
 			copy(deepcopy, path)
-			*res = append(*res, deepcopy)
+			*paths = append(*paths, deepcopy)
 		}
 	}
 
-	doPathSum(root.Left, sum, append(path, root.Val), res)
-	doPathSum(root.Right, sum, append(path, root.Val), res)
+	pathSumHelper(root.Left, sum, append(path, root.Val), paths)
+	pathSumHelper(root.Right, sum, append(path, root.Val), paths)
 }

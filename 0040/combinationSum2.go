@@ -8,11 +8,11 @@ import (
 func combinationSum2(candidates []int, target int) [][]int {
 	sort.Ints(candidates)
 	solutions := [][]int{}
-	doFindCombination(candidates, target, []int{}, &solutions)
+	combinationSumHelper(candidates, target, []int{}, &solutions)
 	return solutions
 }
 
-func doFindCombination(candidates []int, target int, solution []int, solutions *[][]int) {
+func combinationSumHelper(candidates []int, target int, solution []int, solutions *[][]int) {
 	if target == 0 {
 		deepcopy := make([]int, len(solution))
 		copy(deepcopy, solution)
@@ -24,15 +24,11 @@ func doFindCombination(candidates []int, target int, solution []int, solutions *
 		return
 	}
 
-	doFindCombination(candidates[1:], target-candidates[0], append(solution, candidates[0]), solutions)
-	// [1 1 1 2 3], 5
-	// 1 1 1 2
-	//     3
-	// 2 3 
+	combinationSumHelper(candidates[1:], target-candidates[0], append(solution, candidates[0]), solutions)
 	var i int
 	for i = 1; i < len(candidates) && candidates[i] == candidates[0]; i++ {
 	}
-	doFindCombination(candidates[i:], target, solution, solutions)
+	combinationSumHelper(candidates[i:], target, solution, solutions)
 }
 
 func main() {

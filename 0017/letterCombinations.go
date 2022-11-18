@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// dfs
 var numberToLetter = map[byte][]string{
 	'2': []string{"a", "b", "c"},
 	'3': []string{"d", "e", "f"},
@@ -15,11 +16,12 @@ var numberToLetter = map[byte][]string{
 
 func letterCombinations(digits string) []string {
 	var words []string
-	doGenerateWords(digits, "", &words)
+	generateWords(digits, "", &words)
 	return words
 }
 
-func doGenerateWords(digits, word string, words *[]string) {
+// 只要用了append, 就需要使用slice指针 
+func generateWords(digits, word string, words *[]string) {
 	if digits == "" {
 		if word != "" {
 			*words = append(*words, word)
@@ -28,7 +30,7 @@ func doGenerateWords(digits, word string, words *[]string) {
 	}
 
 	for _, letter := range numberToLetter[digits[0]] {
-		doGenerateWords(digits[1:], word+letter, words)
+		generateWords(digits[1:], word+letter, words)
 	}
 }
 

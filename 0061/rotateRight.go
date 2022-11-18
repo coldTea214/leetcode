@@ -3,10 +3,10 @@ func rotateRight(head *ListNode, k int) *ListNode {
 		return head
 	}
 
-	tairPtr := head
+	tair := head
 	count := 1
-	for tairPtr.Next != nil {
-		tairPtr = tairPtr.Next
+	for tair.Next != nil {
+		tair = tair.Next
 		count++
 	}
 	k %= count
@@ -14,13 +14,13 @@ func rotateRight(head *ListNode, k int) *ListNode {
 		return head
 	}
 
-	curPtr := head
+	cur := head
 	for i := 1; i < count-k; i++ {
-		curPtr = curPtr.Next
+		cur = cur.Next
 	}
-	newHead := curPtr.Next
-	curPtr.Next = nil
-	tairPtr.Next = head
+	newHead := cur.Next
+	cur.Next = nil
+	tair.Next = head
 
 	return newHead
 }

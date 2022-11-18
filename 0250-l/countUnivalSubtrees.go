@@ -8,6 +8,11 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+// 这道题难的地方反而是读懂题目
+//        5
+//    1      [5]
+// [5] [5] nil [5]
+// 这个输入解为4, 分别是{叶子节点5}*3 和{子树5->5}
 const fakeVal = 1234567
 
 func countUnivalSubtrees(root *TreeNode) int {

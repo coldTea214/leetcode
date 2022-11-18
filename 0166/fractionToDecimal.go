@@ -1,3 +1,5 @@
+package main
+
 import (
 	"fmt"
 	"strconv"
@@ -8,29 +10,22 @@ func fractionToDecimal(numerator int, denominator int) string {
 		return strconv.Itoa(numerator / denominator)
 	}
 
-	isNegative := false
+	var res string
 	if (numerator < 0 && denominator > 0) || (numerator > 0 && denominator < 0) {
-		isNegative = true
+		res = "-"
 	}
+	numerator, denominator = abs(numerator), abs(denominator)
 
-	res := fractionToDecimalHelper(abs(numerator), abs(denominator))
-	if isNegative {
-		return "-" + res
-	}
-	return res
-}
+	// 先处理整数部分
+	res += strconv.Itoa(numerator / denominator)
+	numerator %= denominator
 
-func fractionToDecimalHelper(numerator, denominator int) string {
-	if numerator >= denominator {
-		decimalPart := fractionToDecimalHelper(numerator%denominator, denominator)
-		return strconv.Itoa(numerator/denominator) + decimalPart[1:]
-	}
-
-	digits := []byte{'0', '.'}
+	// 再处理小数部分
+	digits := []byte{'.'}
 	numeratorAppearedInLoc := make(map[int]int)
-	for i := 2; numerator != 0; i++ {
-		if loc, ok := numeratorAppearedInLoc[numerator]; ok {
-			return fmt.Sprintf("%s(%s)", string(digits[:loc]), string(digits[loc:]))
+	for i := 1; numerator != 0; i++ {
+		if _, ok := numeratorAppearedInLoc[numerator]; ok {
+			break
 		}
 		numeratorAppearedInLoc[numerator] = i
 
@@ -38,7 +33,16 @@ func fractionToDecimalHelper(numerator, denominator int) string {
 		digits = append(digits, byte(numerator/denominator)+'0')
 		numerator %= denominator
 	}
-	return string(digits)
+
+	if numerator == 0 {
+		res += string(digits)
+	} else {
+		// 有循环小数
+		loc := numeratorAppearedInLoc[numerator]
+		res += fmt.Sprintf("%s(%s)", string(digits[:loc]), string(digits[loc:]))
+	}
+
+	return res
 }
 
 func abs(a int) int {
@@ -46,4 +50,9 @@ func abs(a int) int {
 		return -a
 	}
 	return a
+}
+
+func main() {
+	// fmt.Println(fractionToDecimal(337, 333))
+	fmt.Println(fractionToDecimal(-50, 8))
 }

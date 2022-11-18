@@ -1,4 +1,5 @@
 // 前置题 0033
+// 变化点是 nums 可能有相同数字
 func search(nums []int, target int) bool {
 	low, high := 0, len(nums)-1
 	for low <= high {

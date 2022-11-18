@@ -1,3 +1,4 @@
+// 前置题 0026
 func removeDuplicates(nums []int) int {
 	slow := 2
 	for quick := slow; quick < len(nums); quick++ {

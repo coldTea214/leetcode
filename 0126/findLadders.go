@@ -80,8 +80,8 @@ func findLadders(beginWord string, endWord string, words []string) [][]string {
 	}
 
 	var ladders [][]string
-	var doFindLadders func(string, []string)
-	doFindLadders = func(beginWord string, ladder []string) {
+	var findLaddersHelper func(string, []string)
+	findLaddersHelper = func(beginWord string, ladder []string) {
 		if len(ladder) == length {
 			if ladder[len(ladder)-1] == endWord {
 				deepcopy := make([]string, len(ladder))
@@ -92,9 +92,9 @@ func findLadders(beginWord string, endWord string, words []string) [][]string {
 		}
 
 		for _, word := range nextWord[beginWord] {
-			doFindLadders(word, append(ladder, word))
+			findLaddersHelper(word, append(ladder, word))
 		}
 	}
-	doFindLadders(beginWord, []string{beginWord})
+	findLaddersHelper(beginWord, []string{beginWord})
 	return ladders
 }

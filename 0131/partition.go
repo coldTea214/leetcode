@@ -2,34 +2,40 @@ package main
 
 import "fmt"
 
+// dfs
 func partition(s string) [][]string {
+	n := len(s)
+	isPalindrome := make([][]bool, n)
+	for i := range s {
+		isPalindrome[i] = make([]bool, n)
+		for j := range s {
+			isPalindrome[i][j] = true
+		}
+	}
+	for i := n - 1; i >= 0; i-- {
+		for j := i + 1; j < n; j++ {
+			isPalindrome[i][j] = s[i] == s[j] && isPalindrome[i+1][j-1]
+		}
+	}
+
 	solutions := [][]string{}
-	doPartition(s, []string{}, &solutions)
+	partitionHelper(0, s, isPalindrome, []string{}, &solutions)
 	return solutions
 }
 
-func doPartition(s string, solution []string, solutions *[][]string) {
-	if len(s) == 0 {
+func partitionHelper(idx int, s string, isPalindrome [][]bool, solution []string, solutions *[][]string) {
+	if idx == len(s) {
 		deepcopy := make([]string, len(solution))
 		copy(deepcopy, solution)
 		*solutions = append(*solutions, deepcopy)
 		return
 	}
 
-	for i := 0; i < len(s); i++ {
-		if isPalindrome(s[:i+1]) {
-			doPartition(s[i+1:], append(solution, s[:i+1]), solutions)
+	for i := idx; i < len(s); i++ {
+		if isPalindrome[idx][i] {
+			partitionHelper(i+1, s, isPalindrome, append(solution, s[idx:i+1]), solutions)
 		}
 	}
-}
-
-func isPalindrome(s string) bool {
-	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
-		if s[i] != s[j] {
-			return false
-		}
-	}
-	return true
 }
 
 func main() {

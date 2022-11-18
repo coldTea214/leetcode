@@ -2,23 +2,24 @@ package main
 
 import "fmt"
 
+// dfs
 func generateParenthesis(n int) []string {
 	var solutions []string
-	doGenerate(n, 0, 0, "", &solutions)
+	generateParenthesisHelper(n, 0, 0, "", &solutions)
 	return solutions
 }
 
-func doGenerate(n, lNum, rNum int, solution string, solutions *[]string) {
+func generateParenthesisHelper(n, lNum, rNum int, solution string, solutions *[]string) {
 	if lNum == n && rNum == n {
 		*solutions = append(*solutions, solution)
 		return
 	}
 
 	if lNum < n {
-		doGenerate(n, lNum+1, rNum, solution+"(", solutions)
+		generateParenthesisHelper(n, lNum+1, rNum, solution+"(", solutions)
 	}
 	if rNum < lNum {
-		doGenerate(n, lNum, rNum+1, solution+")", solutions)
+		generateParenthesisHelper(n, lNum, rNum+1, solution+")", solutions)
 	}
 }
 
