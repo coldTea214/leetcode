@@ -20,7 +20,6 @@ func reorderList(head *ListNode) {
 	}
 
 	slow, quick := head, head
-	// tips: 
 	for quick.Next != nil && quick.Next.Next != nil {
 		slow = slow.Next
 		quick = quick.Next.Next
@@ -35,11 +34,6 @@ func reorderList(head *ListNode) {
 	// 1 -> 2 -> 3  4 -> 5
 	// h         s 
 	// 1 -> 2 -> 3  4 -> 5 -> 6
-	// tips: 如果上述判断条件是 for quick != nil && quick.Next != nil, 则 slow 位置略有不同
-	//           s
-	// 1 -> 2 -> 3  4 -> 5
-	//                s
-	// 1 -> 2 -> 3 -> 4  5 -> 6
 
 	var prev *ListNode
 	for head2 != nil {

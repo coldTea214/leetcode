@@ -2,18 +2,22 @@ package main
 
 import "fmt"
 
-// input:    [1 3 -1 -3  5  3 6 7] 3
-// leftMax:  [1 3  3 -3  5  5 6 7]
-// rightMax:      [1  3 -1 -3 6 6 6 7]
-// res:           [3  3  5  5 6 7]
+// 稀疏表
+// leftMax:  i/k*k 到 i/k*k+i%k   区间求max
+// rightMax: i     到 (i+k-1)/k*k 区间求max
+// res:      i     到 i+k-1       区间求max，可以通过rightMax和leftMax错位取max求解
+//
+// leftMax:  0 max(0-1) max(0-2) 3        max(3-4) max(3-5) 6
+// rightMax:            0        max(1-3) max(2-3) 3        max(4-6) max(5-6) 6
+// res:                 max(0-2) max(1-3) max(2-4) max(3-5) max(4-6) max(5-6) 6
 func maxSlidingWindow(nums []int, k int) []int {
 	if k <= 1 {
 		return nums
 	}
 
-	nLen := len(nums)
-	leftMax := make([]int, nLen)
-	for i := 0; i < nLen; i++ {
+	n := len(nums)
+	leftMax := make([]int, n)
+	for i := 0; i < n; i++ {
 		if i%k == 0 {
 			leftMax[i] = nums[i]
 		} else {
@@ -21,18 +25,18 @@ func maxSlidingWindow(nums []int, k int) []int {
 		}
 	}
 
-	rightMax := make([]int, nLen)
-	rightMax[nLen-1] = nums[nLen-1]
-	for j := nLen - 2; j >= 0; j-- {
-		if j%k == 0 {
-			rightMax[j] = nums[j]
+	rightMax := make([]int, n)
+	rightMax[n-1] = nums[n-1]
+	for i := n - 2; i >= 0; i-- {
+		if i%k == 0 {
+			rightMax[i] = nums[i]
 		} else {
-			rightMax[j] = max(nums[j], rightMax[j+1])
+			rightMax[i] = max(nums[i], rightMax[i+1])
 		}
 	}
 
-	res := make([]int, nLen-k+1)
-	for i := 0; i <= nLen-k; i++ {
+	res := make([]int, n-k+1)
+	for i := 0; i <= n-k; i++ {
 		res[i] = max(rightMax[i], leftMax[i+k-1])
 	}
 	return res

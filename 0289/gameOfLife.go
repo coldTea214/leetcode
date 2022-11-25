@@ -9,6 +9,7 @@ func gameOfLife(board [][]int) {
 	}
 
 	check := func(i, j int) {
+		// 检查 board[i][j] 一圈有几个活细胞
 		liveNum := 0
 		for r := i - 1; r <= i+1; r++ {
 			for c := j - 1; c <= j+1; c++ {
@@ -21,10 +22,13 @@ func gameOfLife(board [][]int) {
 		}
 
 		if board[i][j] == 1 && (liveNum < 2 || liveNum > 3) {
+			// 规则1、3
 			board[i][j] = 2
 		} else if board[i][j] == 0 && liveNum == 3 {
+			// 规则4
 			board[i][j] = 3
 		}
+		// 规则2
 	}
 
 	for i := 0; i < m; i++ {

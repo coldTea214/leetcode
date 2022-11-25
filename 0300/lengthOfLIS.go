@@ -2,7 +2,7 @@ import "sort"
 
 // O(n^2)
 func lengthOfLIS(nums []int) int {
-	// dp[i] 代表为第 i 个数字为结尾的最长上升子序列的长度
+	// dp[i] 代表nums[:i]的最长上升子序列的长度
 	dp, res := make([]int, len(nums)+1), 0
 	for i := 1; i <= len(nums); i++ {
 		dp[i] = 1

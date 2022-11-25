@@ -1,17 +1,17 @@
 func kthSmallest(root *TreeNode, k int) int {
-	res, count := 0, 0
-	inorder(root, k, &count, &res)
+	var res int
+	inorder(root, &k, &res)
 	return res
 }
 
-func inorder(node *TreeNode, k int, count *int, res *int) {
-	if node != nil {
-		inorder(node.Left, k, count, res)
-		*count++
-		if *count == k {
+func inorder(node *TreeNode, k *int, res *int) {
+	if node != nil && *k != 0 {
+		inorder(node.Left, k, res)
+		*k--
+		if *k == 0 {
 			*res = node.Val
 			return
 		}
-		inorder(node.Right, k, count, res)
+		inorder(node.Right, k, res)
 	}
 }

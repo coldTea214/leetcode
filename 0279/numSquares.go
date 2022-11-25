@@ -3,7 +3,7 @@ import "math"
 func numSquares(n int) int {
 	dp := make([]int, n+1)
 	for i := 0; i < len(dp); i++ {
-		dp[i] = math.MaxInt32
+		dp[i] = i
 	}
 
 	perfects := []int{}

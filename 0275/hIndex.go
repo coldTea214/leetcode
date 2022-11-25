@@ -12,5 +12,5 @@ func hIndex(citations []int) int {
 			low = mid + 1
 		}
 	}
-	return len(citations) - low
+	return count - low
 }
