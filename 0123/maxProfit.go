@@ -4,6 +4,9 @@ import "fmt"
 
 // 后置题 0188
 func maxProfit(prices []int) int {
+	// buy[i]  表示持有第i次交易股票时的最大收益
+	// sell[i] 表示不持有第i次交易股票时的最大收益
+	// buy[1] = -3, 因为买入股票导致收益为负
 	buy1, sell1 := -prices[0], 0
 	buy2, sell2 := -prices[0], 0
 	//        3  2  6  5  0 3

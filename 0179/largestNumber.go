@@ -11,7 +11,10 @@ func largestNumber(nums []int) string {
 	if len(nums) == 0 {
 		return ""
 	}
-	numStrs := toStringArray(nums)
+	var numStrs []string
+	for _, num := range nums {
+		numStrs = append(numStrs, strconv.Itoa(num))
+	}
 
 	sort.Slice(numStrs, func(i, j int) bool {
 		return numStrs[i]+numStrs[j] > numStrs[j]+numStrs[i]
@@ -22,14 +25,6 @@ func largestNumber(nums []int) string {
 		return "0"
 	}
 	return strings.Join(numStrs, "")
-}
-
-func toStringArray(nums []int) []string {
-	var strs []string
-	for _, num := range nums {
-		strs = append(strs, strconv.Itoa(num))
-	}
-	return strs
 }
 
 func quickSort(strs []string, low, high int) {

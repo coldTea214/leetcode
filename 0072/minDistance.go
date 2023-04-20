@@ -23,7 +23,7 @@ func minDistance(word1, word2 string) int {
 			if word1[i-1] == word2[j-1] {
 				dp[i][j] = dp[i-1][j-1]
 			} else {
-				// 删 [插入a、跟删除b没差别]
+				// 删word1(插word2等价)、删word2、替换word1(替换word2等价)
 				dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])
 			}
 		}

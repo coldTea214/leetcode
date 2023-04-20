@@ -15,7 +15,9 @@ func majorityElement(nums []int) []int {
 			count2--
 		}
 	}
-
+	// 上述步骤可以理解成, 每凑到3个不同的数自动消除
+	// 所以当数x出现个数>n/3, 它必出现于candidate中
+	
 	count1, count2 = 0, 0
 	for _, num := range nums {
 		if num == candidate1 {

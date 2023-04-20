@@ -8,7 +8,7 @@ func maxPathSum(root *TreeNode) int {
 	return maxSum
 }
 
-// 返回的是以 root 为"起点"，最大路径和
+// 返回的是包含 root 的最大路径和
 func maxPathSumHelper(root *TreeNode, maxSum *int) int {
 	if root == nil {
 		return 0

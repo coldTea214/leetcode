@@ -12,6 +12,7 @@ func combinationSumHelper(candidates []int, k, n int, solution []int, solutions 
 		deepcopy := make([]int, len(solution))
 		copy(deepcopy, solution)
 		*solutions = append(*solutions, deepcopy)
+		return
 	}
 
 	if len(candidates) == 0 || n < candidates[0] || len(solution) == k {

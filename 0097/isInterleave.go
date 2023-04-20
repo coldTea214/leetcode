@@ -1,3 +1,4 @@
+// 前置题 0087
 // 递归
 func isInterleave(s1 string, s2 string, s3 string) bool {
 	if len(s1)+len(s2) != len(s3) {
@@ -40,10 +41,10 @@ func isInterleave2(s1 string, s2 string, s3 string) bool {
         for j := 0; j <= n; j++ {
             p := i + j - 1
             if i > 0 {
-                dp[i][j] = dp[i][j] || (dp[i-1][j] && s1[i-1] == s3[p])
+                dp[i][j] = dp[i-1][j] && s1[i-1] == s3[p]
             }
             if j > 0 {
-                dp[i][j] = dp[i][j] || (dp[i][j-1] && s2[j-1] == s3[p])
+                dp[i][j] = dp[i][j] || dp[i][j-1] && s2[j-1] == s3[p]
             }
         }
     }

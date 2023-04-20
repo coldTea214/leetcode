@@ -1,6 +1,28 @@
-import "strings"
+package main
+
+import (
+	"fmt"
+	"strings"
+)
 
 func simplifyPath(path string) string {
+	fields := strings.Split(path, "/")
+	var stack []string
+	for _, field := range fields {
+		switch field {
+		case "", ".":
+		case "..":
+			if len(stack) > 0 {
+				stack = stack[:len(stack)-1]
+			}
+		default:
+			stack = append(stack, field)
+		}
+	}
+	return "/" + strings.Join(stack, "/")
+}
+
+func simplifyPath2(path string) string {
 	pLen := len(path)
 	stack := make([]string, 0, pLen/2)
 	dir := make([]byte, 0, pLen)
@@ -27,4 +49,10 @@ func simplifyPath(path string) string {
 	}
 
 	return "/" + strings.Join(stack, "/")
+}
+
+func main() {
+	fmt.Println(simplifyPath("/home/"))
+	fmt.Println(simplifyPath("/../"))
+	fmt.Println(simplifyPath("/home//foo/"))
 }

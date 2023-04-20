@@ -1,4 +1,7 @@
 func myPow(x float64, n int) float64 {
+	if x == 0 {
+		return 0
+	}
 	if n < 0 {
 		return 1.0 / pow(x, -n)
 	}
@@ -6,9 +9,6 @@ func myPow(x float64, n int) float64 {
 }
 
 func pow(x float64, n int) float64 {
-	if x == 0 {
-		return 0
-	}
 	if n == 0 {
 		return 1
 	}

@@ -4,11 +4,12 @@ import (
 	"fmt"
 )
 
+// 前置题 0055
 func jump(nums []int) int {
 	lastReach := 0
 	canReach := 0
 	steps := 0
-	for i := 0; i < len(nums)-1; i++ {
+	for i := 0; i < len(nums)-1 && i <= canReach; i++ {
 		if canReach < i+nums[i] {
 			canReach = i + nums[i]
 		}

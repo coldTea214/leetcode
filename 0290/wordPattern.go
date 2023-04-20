@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// 前置题 0205
 func wordPattern(pattern string, str string) bool {
 	ps := strings.Split(pattern, "")
 	ss := strings.Split(str, " ")

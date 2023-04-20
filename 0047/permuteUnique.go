@@ -1,11 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 // dfs
 func permuteUnique(nums []int) [][]int {
 	numInPermutation := make(map[int]bool)
 	var permutations [][]int
+	sort.Ints(nums)
 	permuteUniqueHelper(nums, numInPermutation, []int{}, &permutations)
 	return permutations
 }
@@ -18,14 +22,14 @@ func permuteUniqueHelper(nums []int, numInPermutation map[int]bool, permutation 
 		return
 	}
 
-	numInPermutationThisLevel := make(map[int]bool)
 	for i := 0; i < len(nums); i++ {
-		if !numInPermutation[i] && !numInPermutationThisLevel[nums[i]] {
-			// 此时只能以索引i来唯一确认num出现在了排列里，而非nums[i]
+		// 此时只能以索引i来唯一确认num出现在了排列里，而非nums[i]
+		if !numInPermutation[i] {
 			numInPermutation[i] = true
-			numInPermutationThisLevel[nums[i]] = true
 			permuteUniqueHelper(nums, numInPermutation, append(permutation, nums[i]), permutations)
 			numInPermutation[i] = false
+			for ; i+1 < len(nums) && nums[i+1] == nums[i]; i++ {
+			}
 		}
 	}
 }

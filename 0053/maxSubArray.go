@@ -1,3 +1,4 @@
+// 后置题 0152
 func maxSubArray(nums []int) int {
 	curMax, maxSum := max(0, nums[0]), nums[0]
 	for i := 1; i < len(nums); i++ {

@@ -1,24 +1,16 @@
 // 归并排序思想，复杂度 n*logk
 func mergeKLists(lists []*ListNode) *ListNode {
-	if len(lists) == 0 {
+	switch len(lists) {
+	case 0:
 		return nil
-	}
-	return mergeHelper(lists)
-}
-
-func mergeHelper(lists []*ListNode) *ListNode {
-	if len(lists) == 1 {
+	case 1:
 		return lists[0]
-	}
-	if len(lists) == 2 {
+	case 2:
 		return merge2Lists(lists[0], lists[1])
 	}
 
 	half := len(lists) >> 1
-	return mergeHelper([]*ListNode{
-		mergeHelper(lists[:half]),
-		mergeHelper(lists[half:]),
-	})
+	return merge2Lists(mergeKLists(lists[:half]), mergeKLists(lists[half:]))
 }
 
 func merge2Lists(l1 *ListNode, l2 *ListNode) *ListNode {
@@ -37,8 +29,7 @@ func merge2Lists(l1 *ListNode, l2 *ListNode) *ListNode {
 
 	if l1 != nil {
 		cur.Next = l1
-	}
-	if l2 != nil {
+	} else {
 		cur.Next = l2
 	}
 	return preHead.Next

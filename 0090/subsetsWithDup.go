@@ -6,7 +6,7 @@ import (
 )
 
 // 前置题 0078
-// 变化点是 nums可以重复
+// 变化点是 nums 可以重复
 func subsetsWithDup(nums []int) [][]int {
 	var result [][]int
 	sort.Ints(nums)

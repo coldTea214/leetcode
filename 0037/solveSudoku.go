@@ -17,6 +17,7 @@ func solveSudoku(board [][]byte) {
 	solveSudokuHelper(0, appearInRow, appearInCol, appearInBlock, board)
 }
 
+// dfs 仅求一个解时, helper 函数 return bool
 func solveSudokuHelper(count int, appearInRow, appearInCol, appearInBlock [9][10]bool, board [][]byte) bool {
 	if count == 81 {
 		return true

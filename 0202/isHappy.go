@@ -1,3 +1,7 @@
+package main
+
+import "fmt"
+
 func isHappy(n int) bool {
 	numAppeared := make(map[int]bool)
 	for !numAppeared[n] {
@@ -14,4 +18,10 @@ func transform(n int) int {
 		n /= 10
 	}
 	return res
+}
+
+func main() {
+	// true true
+	fmt.Println(isHappy(19))
+	fmt.Println(isHappy(7))
 }

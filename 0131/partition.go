@@ -2,14 +2,16 @@ package main
 
 import "fmt"
 
+// 前置题 0005
 // dfs
 func partition(s string) [][]string {
 	n := len(s)
 	isPalindrome := make([][]bool, n)
 	for i := range s {
 		isPalindrome[i] = make([]bool, n)
-		for j := range s {
-			isPalindrome[i][j] = true
+		isPalindrome[i][i] = true
+		if i > 0 {
+			isPalindrome[i][i-1] = true // 无物理含义, 方便下面dp迭代
 		}
 	}
 	for i := n - 1; i >= 0; i-- {

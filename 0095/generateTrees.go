@@ -3,12 +3,11 @@ func generateTrees(n int) []*TreeNode {
 }
 
 func generateTreesHelper(start, end int) []*TreeNode {
-	trees := []*TreeNode{}
 	if start > end {
-		trees = append(trees, nil)
-		return trees
+		return []*TreeNode{nil}
 	}
 
+	trees := []*TreeNode{}
 	for i := start; i <= end; i++ {
 		left := generateTreesHelper(start, i-1)
 		right := generateTreesHelper(i+1, end)

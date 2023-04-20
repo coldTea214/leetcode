@@ -1,3 +1,4 @@
+// 后置题 0290
 func isIsomorphic(s string, t string) bool {
 	if len(s) != len(t) {
 		return false

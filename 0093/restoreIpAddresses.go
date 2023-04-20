@@ -10,11 +10,8 @@ func restoreIpAddresses(s string) []string {
 }
 
 func restoreIpAddressesHelper(s string, solution []string, solutions *[]string) {
-	if len(solution) == 3 {
-		if isValid(s) {
-			solution = append(solution, s)
-			*solutions = append(*solutions, fmt.Sprintf("%s.%s.%s.%s", solution[0], solution[1], solution[2], solution[3]))
-		}
+	if len(solution) == 4 && s == "" {
+		*solutions = append(*solutions, fmt.Sprintf("%s.%s.%s.%s", solution[0], solution[1], solution[2], solution[3]))
 		return
 	}
 
@@ -23,7 +20,7 @@ func restoreIpAddressesHelper(s string, solution []string, solutions *[]string) 
 		return
 	}
 
-	for end := 1; end <= 3 && end < len(s); end++ {
+	for end := 1; end <= 3 && end <= len(s); end++ {
 		if isValid(s[:end]) {
 			restoreIpAddressesHelper(s[end:], append(solution, s[:end]), solutions)
 		}

@@ -8,6 +8,7 @@ func numDecodings(s string) int {
 	dp[0], dp[1] = 1, 1
 	for i := 1; i < len(s); i++ {
 		if s[i] != '0' {
+			// 当前字母可以单独编码
 			dp[i+1] = dp[i]
 		} else if s[i-1] != '1' && s[i-1] != '2' {
 			return 0
@@ -15,6 +16,7 @@ func numDecodings(s string) int {
 
 		if s[i-1] == '1' ||
 			s[i-1] == '2' && '0' <= s[i] && s[i] <= '6' {
+			// 当前字母可以和前一字母一起编码
 			dp[i+1] += dp[i-1]
 		}
 	}

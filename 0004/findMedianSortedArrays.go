@@ -8,7 +8,6 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	}
 }
 
-// 找第k小的数
 func findKthMin(k int, nums1 []int, nums2 []int) int {
 	if len(nums1) > len(nums2) {
 		return findKthMin(k, nums2, nums1)
@@ -22,9 +21,6 @@ func findKthMin(k int, nums1 []int, nums2 []int) int {
 
 	i, j := min(k/2, len(nums1))-1, min(k/2, len(nums2))-1
 	if nums1[i] > nums2[j] {
-		// nums1: 6 7 8
-		// nums2: 1 2 3 4 5
-		// k: 3
 		return findKthMin(k-j-1, nums1, nums2[j+1:])
 	} else {
 		// 关键是对于 nums1[i] == nums2[j] 的分析

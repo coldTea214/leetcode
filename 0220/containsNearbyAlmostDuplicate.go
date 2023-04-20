@@ -29,6 +29,9 @@ func bucketID(num, width int) int {
 	if num >= 0 {
 		return num / width
 	}
+	// 细节处理以保障正负数桶连贯, 如 t=3
+	// id:  -1            0
+	//     [-4 -3 -2 -1] [0 1 2 3]
 	return (num+1)/width - 1
 }
 

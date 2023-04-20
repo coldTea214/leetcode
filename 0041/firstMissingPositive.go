@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// 后置题 0268
 func firstMissingPositive(nums []int) int {
 	if len(nums) == 0 {
 		return 1

@@ -41,6 +41,7 @@ func maximumGap(nums []int) int {
 		}
 	}
 
+	// 引入maxInBucketBefore因为最大gap可能跨多个桶
 	res, maxInBucketBefore := 0, maxInBucket[0]
 	for i := 1; i < bucketNum; i++ {
 		if minInBucket[i] == math.MaxInt32 {

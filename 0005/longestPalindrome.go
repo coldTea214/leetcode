@@ -1,32 +1,34 @@
+package main
+
+import "fmt"
+
+// 后置题 0131
+// manacher 算法更快
 func longestPalindrome(s string) string {
-	if len(s) == 0 {
-		return ""
+	n := len(s)
+	isPalindrome := make([][]bool, n)
+	for i := range s {
+		isPalindrome[i] = make([]bool, n)
+		isPalindrome[i][i] = true
+		if i > 0 {
+			isPalindrome[i][i-1] = true // 无物理含义, 方便下面dp迭代
+		}
 	}
 
 	start, end := 0, 0
-	for i := 0; i < len(s); i++ {
-		len1 := expandAroundCenter(s, i, i)
-		len2 := expandAroundCenter(s, i, i+1)
-		curLen := max(len1, len2)
-		if curLen > end-start {
-			start = i - (curLen-1)/2
-			end = i + curLen/2
+	for i := n - 1; i >= 0; i-- {
+		for j := i + 1; j < n; j++ {
+			if s[i] == s[j] && isPalindrome[i+1][j-1] {
+				isPalindrome[i][j] = true
+				if j-i > end-start {
+					start, end = i, j
+				}
+			}
 		}
 	}
-	return string(s[start : end+1])
+	return s[start : end+1]
 }
 
-func expandAroundCenter(s string, left, right int) int {
-	for left >= 0 && right < len(s) && s[left] == s[right] {
-		left--
-		right++
-	}
-	return right - left - 1
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
+func main() {
+	fmt.Println(longestPalindrome("babad"))
 }

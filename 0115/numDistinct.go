@@ -13,8 +13,8 @@ func numDistinct(s string, t string) int {
 	for j := 0; j < tLen; j++ {
 		for i := j; i < sLen; i++ {
 			if t[j] == s[i] {
-				// s[i] 不删，等价与 s[:i-1] 与 t[:j-1] 的配对
-				// s[i] 删掉，等价于 s[:i-1] 与 t[:j] 的配对
+				// s[i] 不删，等价于 s[:i] 与 t[:j] 的配对
+				// s[i] 删掉，等价于 s[:i] 与 t[:j+1] 的配对
 				dp[i+1][j+1] = dp[i][j] + dp[i][j+1]
 			} else {
 				// s[i] 只能删掉

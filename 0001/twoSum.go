@@ -1,3 +1,4 @@
+// 后置题 0167
 func twoSum(nums []int, target int) []int {
 	numIdx := make(map[int]int)
 	for idx, num := range nums {
@@ -9,7 +10,6 @@ func twoSum(nums []int, target int) []int {
 			if idx2 == idx1 {
 				continue
 			}
-
 			return []int{idx1, idx2}
 		}
 	}

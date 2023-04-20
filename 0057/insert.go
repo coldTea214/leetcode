@@ -3,6 +3,7 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 		return [][]int{newInterval}
 	}
 
+	// 可以换成二分查找, 但没必要
 	var insertLoc int
 	for insertLoc = 0; insertLoc < len(intervals) && intervals[insertLoc][0] <= newInterval[0]; insertLoc++ {
 	}

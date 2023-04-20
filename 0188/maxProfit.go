@@ -8,9 +8,6 @@ func maxProfit(k int, prices []int) int {
 		return 0
 	}
 
-	// buy[i]  表示持有第i次交易股票时的最大收益
-	// sell[i] 表示不持有第i次交易股票时的最大收益
-	// buy[1] = -3, 因为买入股票导致收益为负
 	buy, sell := make([]int, k+1), make([]int, k+1)
 	for i := 0; i <= k; i++ {
 		buy[i] = -prices[0]

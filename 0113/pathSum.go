@@ -6,19 +6,18 @@ func pathSum(root *TreeNode, sum int) [][]int {
 
 func pathSumHelper(root *TreeNode, sum int, path []int, paths *[][]int) {
 	if root == nil {
+		// append paths 相关逻辑不能放这, left/right nil 会入队2次
 		return
 	}
 
 	sum -= root.Val
-	if root.Left == nil && root.Right == nil {
-		if sum == 0 {
-			path = append(path, root.Val)
-			deepcopy := make([]int, len(path))
-			copy(deepcopy, path)
-			*paths = append(*paths, deepcopy)
-		}
+	path = append(path, root.Val)
+	if sum == 0 && root.Left == nil && root.Right == nil {
+		deepcopy := make([]int, len(path))
+		copy(deepcopy, path)
+		*paths = append(*paths, deepcopy)
 	}
 
-	pathSumHelper(root.Left, sum, append(path, root.Val), paths)
-	pathSumHelper(root.Right, sum, append(path, root.Val), paths)
+	pathSumHelper(root.Left, sum, path, paths)
+	pathSumHelper(root.Right, sum, path, paths)
 }

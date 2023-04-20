@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-// 前置题 256, 变化点是 3种颜色变成了k种
+// 前置题 0256, 变化点是 3种颜色变成了k种
 func minCostII(costs [][]int) int {
 	n := len(costs[0])
 	dp := costs[0]

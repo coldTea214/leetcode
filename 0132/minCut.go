@@ -1,30 +1,42 @@
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
 func minCut(s string) int {
 	n := len(s)
-	if n == 0 {
-		return 0
-	}
-
-	// dp[i] = minCut(s[:i])
-	dp := make([]int, n+1)
-	for i := 0; i < n+1; i++ {
-		dp[i] = i - 1
-	}
-
-	for i := 0; i < n+1; i++ {
-		// 以 i 为中心，j 为长度向左右扩展
-		for j := 0; 0 <= i-j && i+j < n && s[i-j] == s[i+j]; j++ {
-			if dp[i-j]+1 < dp[i+j+1] {
-				dp[i+j+1] = dp[i-j] + 1
-			}
+	isPalindrome := make([][]bool, n)
+	for i := range s {
+		isPalindrome[i] = make([]bool, n)
+		isPalindrome[i][i] = true
+		if i > 0 {
+			isPalindrome[i][i-1] = true // 无物理含义, 方便下面dp迭代
 		}
-
-		// 以 i 和 i+1 中间的空为中心，向左右扩展
-		for j := 1; 0 <= i-j+1 && i+j < n && s[i-j+1] == s[i+j]; j++ {
-			if dp[i-j+1]+1 < dp[i+j+1] {
-				dp[i+j+1] = dp[i-j+1] + 1
-			}
+	}
+	for i := n - 1; i >= 0; i-- {
+		for j := i + 1; j < n; j++ {
+			isPalindrome[i][j] = s[i] == s[j] && isPalindrome[i+1][j-1]
 		}
 	}
 
-	return dp[n]
+	// dp[i] = minCut(s[:i+1])
+	dp := make([]int, n)
+	for i := 0; i < n; i++ {
+		if isPalindrome[0][i] {
+			continue
+		}
+		dp[i] = math.MaxInt64
+		for j := 0; j < i; j++ {
+			if isPalindrome[j+1][i] && dp[j]+1 < dp[i] {
+				dp[i] = dp[j] + 1
+			}
+		}
+	}
+	return dp[n-1]
+}
+
+func main() {
+	fmt.Println(minCut("aab"))
 }
